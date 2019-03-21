@@ -110,6 +110,7 @@ int fastcdc_chunk_data(unsigned char *p, int n){
         printf("min-exp\n");
         fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
         if(!(fp & g_condition_mask[Mask_64KB])){
+            printf("fp:%x, mask:%x\n", fp, g_condition_mask[Mask_64KB]);
             return i;
         }
     }
