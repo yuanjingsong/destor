@@ -12,6 +12,7 @@ include_directories(src/storage)
 include_directories(src/utils)
 include_directories(/usr/lib/x86_64-linux-gnu/glib-2.0/include/)
 include_directories(/usr/include/glib-2.0/)
+include_directories(/root/anaconda3/include/)
 
 add_executable(destor
         src/chunking/ae_chunking.c
