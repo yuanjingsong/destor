@@ -79,10 +79,8 @@ int fastcdc_chunk_data(unsigned char *p, int n){
     uint64_t fp = 0;
     if(n < g_max_chunk_size){
         if(n <= g_min_chunk_size){
-            printf("0-min\n");
             return n;
         }else if (n < g_expect_chunk_size){
-            printf("min-exp\n");
             for(int i=g_min_chunk_size; i<n; i++){
                 fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
                 if(!(fp & g_condition_mask[Mask_64KB])){
@@ -91,7 +89,6 @@ int fastcdc_chunk_data(unsigned char *p, int n){
             }
             return n;
         }else {
-            printf("exp-max\n");
             for(int i=g_min_chunk_size; i<g_expect_chunk_size; i++){
                 fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
                 if(!(fp & g_condition_mask[Mask_64KB])){
@@ -108,16 +105,12 @@ int fastcdc_chunk_data(unsigned char *p, int n){
         }
     }
     for(int i=g_min_chunk_size; i<g_expect_chunk_size; i++){
-        printf("min-exp\n");
         fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
         if(!(fp & g_condition_mask[Mask_64KB])){
-            printf("fp:%lx, mask:%lx\n", fp, g_condition_mask[Mask_64KB]);
-            printf("and:%ld\n",(fp & g_condition_mask[Mask_64KB]) );
             return i;
         }
     }
     for(int i=g_expect_chunk_size; i<g_max_chunk_size; i++){
-        printf("exp-max\n");
         fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
         if(!(fp & g_condition_mask[Mask_1KB])){
             return i;
