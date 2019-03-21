@@ -14,7 +14,7 @@
 #define MaxChunkSizeOffset 1
 #define MinChunkSizeOffset 1
 
-uint16_t g_gear_matrix[SymbolCount];
+uint64_t g_gear_matrix[SymbolCount];
 uint32_t g_min_chunk_size;
 uint32_t g_max_chunk_size;
 uint32_t g_expect_chunk_size;
@@ -63,7 +63,8 @@ void fastcdc_init(uint32_t expectCS){
         md5_append(&md5_state, seed, SeedLength);
         md5_finish(&md5_state, md5_result);
 
-        memcpy(&g_gear_matrix[i], md5_result, DigistLength);
+        memcpy(&g_gear_matrix[i], md5_result, sizeof(uint64_t));
+        printf("g_gear_matrix[%d]:%lx\n", g_gear_matrix[i]);
     }
 
     g_min_chunk_size = expectCS >> MinChunkSizeOffset;
