@@ -64,12 +64,10 @@ void fastcdc_init(uint32_t expectCS){
         md5_finish(&md5_state, md5_result);
 
         memcpy(&g_gear_matrix[i], md5_result, sizeof(uint64_t));
-        printf("g_gear_matrix[%d]:%lx\n", i, g_gear_matrix[i]);
     }
 
     g_min_chunk_size = expectCS >> MinChunkSizeOffset;
     g_max_chunk_size = expectCS << MaxChunkSizeOffset;
-    printf("min chunk:%d, max chunk:%d\n", g_min_chunk_size, g_max_chunk_size);
     g_expect_chunk_size = expectCS;
 }
 
