@@ -11,8 +11,8 @@
 #define SymbolCount 256
 #define DigistLength 16
 #define SeedLength 64
-#define MaxChunkSizeOffset 1
-#define MinChunkSizeOffset 1
+#define MaxChunkSizeOffset 3
+#define MinChunkSizeOffset 2
 
 uint64_t g_gear_matrix[SymbolCount];
 uint32_t g_min_chunk_size;
