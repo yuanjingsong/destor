@@ -138,6 +138,7 @@ void start_chunk_phase() {
 		assert(destor.chunk_max_size <= CONTAINER_SIZE - CONTAINER_META_SIZE);
 
 		chunkAlg_init();
+		normalized_rabin_init(destor.chunk_avg_size);
 		chunking = normalized_rabin_chunk_data;
 	}else if(destor.chunk_algorithm == CHUNK_TTTD){
 		int pwr;

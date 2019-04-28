@@ -15,9 +15,9 @@
 #define MinChunkSizeOffset 2
 
 uint64_t g_gear_matrix[SymbolCount];
-uint32_t g_min_chunk_size;
-uint32_t g_max_chunk_size;
-uint32_t g_expect_chunk_size;
+uint32_t g_min_fastcdc_chunk_size;
+uint32_t g_max_fastcdc_chunk_size;
+uint32_t g_expect_fastcdc_chunk_size;
 
 enum{
     Mask_64B,
@@ -43,10 +43,10 @@ uint64_t g_condition_mask[] = {
         0x0000d90003530000,// 2KB
         0x0000d90103530000,// 4KB
         0x0000d90303530000,// 8KB
-        0x0000d90703530000,// 16KB
-        0x0003590703530000,// 32KB
-        0x0007590703530000,// 64KB
-        0x0007590713530000// 128KB
+        0x0000d90313530000,// 16KB
+        0x0000d90f03530000,// 32KB
+        0x0000d90303537000,// 64KB
+        0x0000d90703537000// 128KB
 };
 
 void fastcdc_init(uint32_t expectCS){
@@ -66,20 +66,52 @@ void fastcdc_init(uint32_t expectCS){
         memcpy(&g_gear_matrix[i], md5_result, sizeof(uint64_t));
     }
 
-    g_min_chunk_size = expectCS >> MinChunkSizeOffset;
-    g_max_chunk_size = expectCS << MaxChunkSizeOffset;
-    g_expect_chunk_size = expectCS;
+    g_min_fastcdc_chunk_size = expectCS >> MinChunkSizeOffset;
+    g_max_fastcdc_chunk_size = expectCS << MaxChunkSizeOffset;
+    g_expect_fastcdc_chunk_size = expectCS;
 }
 
 
 int fastcdc_chunk_data(unsigned char *p, int n){
+
+    UINT64 fingerprint=0,digest;
+    int i=g_min_fastcdc_chunk_size, Mid=g_min_fastcdc_chunk_size + 4*1024;
+    //return n;
+
+    if(n<=g_min_fastcdc_chunk_size) //the minimal  subChunk Size.
+        return n;
+    //windows_reset();
+    if(n > g_max_fastcdc_chunk_size)
+        n = g_max_fastcdc_chunk_size;
+    else if(n<Mid)
+        Mid = n;
+    while(i<Mid)
+    {
+        fingerprint = (fingerprint<<1) + (g_gear_matrix[p[i]]);
+        if ((!(fingerprint & g_condition_mask[8]))) { //AVERAGE*2, *4, *8
+            return i;
+        }
+        i++;
+    }
+    while(i<n	)
+    {
+        fingerprint = (fingerprint<<1) + (g_gear_matrix[p[i]]);
+        if ((!(fingerprint & g_condition_mask[6]))) { //Average/2, /4, /8
+            return i;
+        }
+        i++;
+    }
+    //printf("\r\n==chunking FINISH!\r\n");
+    return i;
+
+    /*
     assert(p != NULL);
     uint64_t fp = 0;
-    if(n < g_max_chunk_size){
-        if(n <= g_min_chunk_size){
+    if(n < g_max_fastcdc_chunk_size){
+        if(n <= g_min_fastcdc_chunk_size){
             return n;
-        }else if (n < g_expect_chunk_size){
-            for(int i=g_min_chunk_size; i<n; i++){
+        }else if (n < g_expect_fastcdc_chunk_size){
+            for(int i=g_min_fastcdc_chunk_size; i<n; i++){
                 fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
                 if(!(fp & g_condition_mask[Mask_64KB])){
                     return i;
@@ -87,13 +119,13 @@ int fastcdc_chunk_data(unsigned char *p, int n){
             }
             return n;
         }else {
-            for(int i=g_min_chunk_size; i<g_expect_chunk_size; i++){
+            for(int i=g_min_fastcdc_chunk_size; i<g_expect_fastcdc_chunk_size; i++){
                 fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
                 if(!(fp & g_condition_mask[Mask_64KB])){
                     return i;
                 }
             }
-            for(int i=g_expect_chunk_size; i<n; i++){
+            for(int i=g_expect_fastcdc_chunk_size; i<n; i++){
                 fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
                 if(!(fp & g_condition_mask[Mask_1KB])){
                     return i;
@@ -102,17 +134,18 @@ int fastcdc_chunk_data(unsigned char *p, int n){
             return n;
         }
     }
-    for(int i=g_min_chunk_size; i<g_expect_chunk_size; i++){
+    for(int i=g_min_fastcdc_chunk_size; i<g_expect_fastcdc_chunk_size; i++){
         fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
         if(!(fp & g_condition_mask[Mask_64KB])){
             return i;
         }
     }
-    for(int i=g_expect_chunk_size; i<g_max_chunk_size; i++){
+    for(int i=g_expect_fastcdc_chunk_size; i<g_max_fastcdc_chunk_size; i++){
         fp = ( fp <<1 ) + g_gear_matrix[ p[i] ];
         if(!(fp & g_condition_mask[Mask_1KB])){
             return i;
         }
     }
-    return g_max_chunk_size;
+    return g_max_fastcdc_chunk_size;
+     */
 }
