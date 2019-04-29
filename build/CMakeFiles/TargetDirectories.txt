@@ -1,0 +1,3 @@
+/home/xiawen/destor/build/CMakeFiles/rebuild_cache.dir
+/home/xiawen/destor/build/CMakeFiles/destor.dir
+/home/xiawen/destor/build/CMakeFiles/edit_cache.dir

@@ -66,15 +66,15 @@ void fastcdc_init(uint32_t expectCS){
         memcpy(&g_gear_matrix[i], md5_result, sizeof(uint64_t));
     }
 
-    g_min_fastcdc_chunk_size = expectCS >> MinChunkSizeOffset;
-    g_max_fastcdc_chunk_size = expectCS << MaxChunkSizeOffset;
+    g_min_fastcdc_chunk_size = 6144;
+    g_max_fastcdc_chunk_size = 65536;
     g_expect_fastcdc_chunk_size = expectCS;
 }
 
 
 int fastcdc_chunk_data(unsigned char *p, int n){
 
-    UINT64 fingerprint=0,digest;
+    uint64_t fingerprint=0,digest;
     int i=g_min_fastcdc_chunk_size, Mid=g_min_fastcdc_chunk_size + 4*1024;
     //return n;
 
@@ -88,7 +88,7 @@ int fastcdc_chunk_data(unsigned char *p, int n){
     while(i<Mid)
     {
         fingerprint = (fingerprint<<1) + (g_gear_matrix[p[i]]);
-        if ((!(fingerprint & g_condition_mask[8]))) { //AVERAGE*2, *4, *8
+        if ((!(fingerprint & 0x0000d90f03530000))) { //AVERAGE*2, *4, *8
             return i;
         }
         i++;
@@ -96,7 +96,7 @@ int fastcdc_chunk_data(unsigned char *p, int n){
     while(i<n	)
     {
         fingerprint = (fingerprint<<1) + (g_gear_matrix[p[i]]);
-        if ((!(fingerprint & g_condition_mask[6]))) { //Average/2, /4, /8
+        if ((!(fingerprint & 0x0000d90003530000))) { //Average/2, /4, /8
             return i;
         }
         i++;
