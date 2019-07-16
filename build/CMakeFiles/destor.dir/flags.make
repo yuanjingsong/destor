@@ -6,5 +6,5 @@ C_FLAGS =  -O3   -std=gnu11
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/xiawen/destor/src -I/home/xiawen/destor/src/chunking -I/home/xiawen/destor/src/fsl -I/home/xiawen/destor/src/index -I/home/xiawen/destor/src/recipe -I/home/xiawen/destor/src/storage -I/home/xiawen/destor/src/utils -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include -I/home/xiawen/destor/isaInclude 
+C_INCLUDES = -I/home/zxy/destor/src -I/home/zxy/destor/src/chunking -I/home/zxy/destor/src/fsl -I/home/zxy/destor/src/index -I/home/zxy/destor/src/recipe -I/home/zxy/destor/src/storage -I/home/zxy/destor/src/utils -I/usr/local/include/glib-2.0 -I/usr/local/lib/glib-2.0/include -I/home/zxy/destor/isaInclude 
 

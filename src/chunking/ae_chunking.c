@@ -32,7 +32,7 @@ void ae_init(){
 /*
  * 	n is the size of string p.
  */
-int ae_chunk_data_v2(unsigned char *p, int n) {
+int ae_chunk_data(unsigned char *p, int n) {
 	/*
 	 * curr points to the current position;
 	 * max points to the position of max value;
@@ -53,7 +53,7 @@ int ae_chunk_data_v2(unsigned char *p, int n) {
 	return n;
 }
 
-int ae_chunk_data(unsigned char *p, int n)
+int ae_chunk_data_v2(unsigned char *p, int n)
 {
 	    unsigned char *p_curr, *max_str = p;
 	        int comp_res = 0, i, end, max_pos = 0;

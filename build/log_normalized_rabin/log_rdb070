@@ -1,0 +1,41 @@
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 1963 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 452 segments of 1023 chunks on average
+rewrite phase stops successfully!
+Record 1978 sparse containers, and 1917 of them are inherited
+CMA: read 7751 records.
+CMA: update 7831 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 69
+backup path: /data/datasets/rdb/rdb070
+number of files: 1
+number of chunks: 462640 (12538 bytes on average)
+number of unique chunks: 20292
+total size(B): 5800901686
+stored data size(B): 330638553
+deduplication ratio: 0.9430, 17.5445
+total time(s): 12.629
+throughput(MB/s): 438.07
+number of zero chunks: 4737
+size of zero chunks: 310444032
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 11.703s, 472.71MB/s
+chunk_time : 7.825s, 706.97MB/s
+hash_time : 2.618s, 2113.02MB/s
+dedup_time : 1.788s, 3093.29MB/s
+rewrite_time : 0.080s, 69497.02MB/s
+filter_time : 1.818s, 3042.57MB/s
+write_time : 0.519s, 10651.24MB/s
+custom total duration:0.000000

@@ -11,11 +11,7 @@ static void* sha1_thread(void* arg) {
 	char code[41];
 	struct mh_sha1_ctx *ctx;
 	MD5_HASH_CTX_MGR *msg;
-	MD5_HASH_CTX *ctxptr;
-	MD5_HASH_CTX *result;
 	ctx = malloc(sizeof(struct mh_sha1_ctx));
-	msg = malloc(sizeof(MD5_HASH_CTX_MGR));
-	ctxptr = malloc(sizeof(MD5_HASH_CTX));
 	while (1) {
 		struct chunk* c = sync_queue_pop(chunk_queue);
 
@@ -37,8 +33,8 @@ static void* sha1_thread(void* arg) {
 		//SHA1_Final(c->fp, &ctx);
 
 		mh_sha1_init(ctx);
-		mh_sha1_update_avx(ctx, c->data, c->size);
-		mh_sha1_finalize_avx(ctx, c->fp);
+		mh_sha1_update_avx512(ctx, c->data, c->size);
+		mh_sha1_finalize_avx512(ctx, c->fp);
 		
 		//md5_ctx_mgr_init(msg);
 		//result = md5_ctx_mgr_submit(msg, ctxptr, c->data, c->size, HASH_ENTIRE);

@@ -1,0 +1,17 @@
+=== destor stat ===
+the index memory footprint (B): 173559776
+the number of live containers: 19570
+the number of chunks: 91243609
+the number of stored chunks: 5423743
+the size of data (B): 1148507499386
+the size of stored data (B): 80788279728
+the size of saved data (B): 1067719219658
+deduplication ratio: 0.9297, 14.2163
+the number of zero chunks: 1034098
+the size of zero chunks (B): 67770118764
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+2907.302

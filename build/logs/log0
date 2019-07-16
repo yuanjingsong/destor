@@ -1,63 +1,1659 @@
 ******************LNX********************
 ==================LNX_fastcdc===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 66 segments of 1021 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 194 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/LNX
+number of files: 1
+number of chunks: 67449 (12126 bytes on average)
+number of unique chunks: 66477
+total size(B): 817930240
+stored data size(B): 805430763
+deduplication ratio: 0.0153, 1.0155
+total time(s): 0.690
+throughput(MB/s): 1130.78
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.171s, 4557.05MB/s
+chunk_time : 0.246s, 3164.46MB/s
+hash_time : 0.322s, 2425.16MB/s
+dedup_time : 0.064s, 12211.20MB/s
+rewrite_time : 0.003s, 242398.71MB/s
+filter_time : 0.448s, 1739.59MB/s
+write_time : 0.493s, 1582.11MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 2127264
+the number of live containers: 194
+the number of chunks: 67449
+the number of stored chunks: 66477
+the size of data (B): 817930240
+the size of stored data (B): 805430763
+the size of saved data (B): 12499477
+deduplication ratio: 0.0153, 1.0155
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================LNX_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 51 segments of 1010 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 195 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/LNX
+number of files: 1
+number of chunks: 51518 (15876 bytes on average)
+number of unique chunks: 50733
+total size(B): 817930240
+stored data size(B): 806658201
+deduplication ratio: 0.0138, 1.0140
+total time(s): 1.753
+throughput(MB/s): 445.10
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.251s, 3108.73MB/s
+chunk_time : 1.361s, 573.23MB/s
+hash_time : 0.290s, 2687.72MB/s
+dedup_time : 0.104s, 7480.88MB/s
+rewrite_time : 0.004s, 191186.04MB/s
+filter_time : 0.487s, 1602.77MB/s
+write_time : 0.743s, 1050.17MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 1623456
+the number of live containers: 195
+the number of chunks: 51518
+the number of stored chunks: 50733
+the size of data (B): 817930240
+the size of stored data (B): 806658201
+the size of saved data (B): 11272039
+deduplication ratio: 0.0138, 1.0140
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================LNX_normalized_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 68 segments of 1016 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 194 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/LNX
+number of files: 1
+number of chunks: 69107 (11835 bytes on average)
+number of unique chunks: 68126
+total size(B): 817930240
+stored data size(B): 805546127
+deduplication ratio: 0.0151, 1.0154
+total time(s): 1.541
+throughput(MB/s): 506.05
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.269s, 2905.10MB/s
+chunk_time : 1.113s, 700.90MB/s
+hash_time : 0.331s, 2360.03MB/s
+dedup_time : 0.064s, 12132.75MB/s
+rewrite_time : 0.004s, 182636.17MB/s
+filter_time : 0.521s, 1498.21MB/s
+write_time : 0.676s, 1153.91MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 2180032
+the number of live containers: 194
+the number of chunks: 69107
+the number of stored chunks: 68126
+the size of data (B): 817930240
+the size of stored data (B): 805546127
+the size of saved data (B): 12384113
+deduplication ratio: 0.0151, 1.0154
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================LNX_ae===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 46 segments of 1020 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 196 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/LNX
+number of files: 1
+number of chunks: 46933 (17427 bytes on average)
+number of unique chunks: 46756
+total size(B): 817930240
+stored data size(B): 812847460
+deduplication ratio: 0.0062, 1.0063
+total time(s): 1.053
+throughput(MB/s): 740.50
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.237s, 3290.71MB/s
+chunk_time : 0.679s, 1149.54MB/s
+hash_time : 0.300s, 2599.13MB/s
+dedup_time : 0.035s, 22300.21MB/s
+rewrite_time : 0.003s, 285623.97MB/s
+filter_time : 0.498s, 1565.05MB/s
+write_time : 0.569s, 1371.43MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 1496192
+the number of live containers: 196
+the number of chunks: 46933
+the number of stored chunks: 46756
+the size of data (B): 817930240
+the size of stored data (B): 812847460
+the size of saved data (B): 5082780
+deduplication ratio: 0.0062, 1.0063
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ******************RDB********************
 ==================RDB_fastcdc===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 234 segments of 1022 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 684 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/RDB
+number of files: 1
+number of chunks: 239380 (12532 bytes on average)
+number of unique chunks: 236930
+total size(B): 3000000000
+stored data size(B): 2839436800
+deduplication ratio: 0.0535, 1.0565
+total time(s): 2.455
+throughput(MB/s): 1165.29
+number of zero chunks: 2451
+size of zero chunks: 160628736
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.603s, 4742.49MB/s
+chunk_time : 0.927s, 3086.74MB/s
+hash_time : 1.169s, 2447.42MB/s
+dedup_time : 0.135s, 21271.23MB/s
+rewrite_time : 0.011s, 262696.07MB/s
+filter_time : 1.760s, 1625.85MB/s
+write_time : 1.897s, 1507.81MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 7581760
+the number of live containers: 684
+the number of chunks: 239380
+the number of stored chunks: 236930
+the size of data (B): 3000000000
+the size of stored data (B): 2839436800
+the size of saved data (B): 160563200
+deduplication ratio: 0.0535, 1.0565
+the number of zero chunks: 2451
+the size of zero chunks (B): 160628736
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================RDB_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 194 segments of 1020 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 684 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/RDB
+number of files: 1
+number of chunks: 197942 (15155 bytes on average)
+number of unique chunks: 195492
+total size(B): 3000000000
+stored data size(B): 2839436800
+deduplication ratio: 0.0535, 1.0565
+total time(s): 5.933
+throughput(MB/s): 482.23
+number of zero chunks: 2451
+size of zero chunks: 160628736
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.930s, 3075.95MB/s
+chunk_time : 4.608s, 620.94MB/s
+hash_time : 1.263s, 2265.43MB/s
+dedup_time : 0.223s, 12842.66MB/s
+rewrite_time : 0.014s, 205267.83MB/s
+filter_time : 1.774s, 1612.63MB/s
+write_time : 2.694s, 1061.84MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 6255744
+the number of live containers: 684
+the number of chunks: 197942
+the number of stored chunks: 195492
+the size of data (B): 3000000000
+the size of stored data (B): 2839436800
+the size of saved data (B): 160563200
+deduplication ratio: 0.0535, 1.0565
+the number of zero chunks: 2451
+the size of zero chunks (B): 160628736
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================RDB_normalized_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 234 segments of 1022 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 684 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/RDB
+number of files: 1
+number of chunks: 239322 (12535 bytes on average)
+number of unique chunks: 236872
+total size(B): 3000000000
+stored data size(B): 2839436800
+deduplication ratio: 0.0535, 1.0565
+total time(s): 5.764
+throughput(MB/s): 496.35
+number of zero chunks: 2451
+size of zero chunks: 160628736
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 1.039s, 2754.39MB/s
+chunk_time : 4.067s, 703.49MB/s
+hash_time : 1.237s, 2311.97MB/s
+dedup_time : 0.199s, 14384.23MB/s
+rewrite_time : 0.016s, 179441.98MB/s
+filter_time : 1.706s, 1677.45MB/s
+write_time : 2.304s, 1241.71MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 7579904
+the number of live containers: 684
+the number of chunks: 239322
+the number of stored chunks: 236872
+the size of data (B): 3000000000
+the size of stored data (B): 2839436800
+the size of saved data (B): 160563200
+deduplication ratio: 0.0535, 1.0565
+the number of zero chunks: 2451
+the size of zero chunks (B): 160628736
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================RDB_ae===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 210 segments of 1020 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 725 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/RDB
+number of files: 1
+number of chunks: 214332 (13996 bytes on average)
+number of unique chunks: 214332
+total size(B): 3000000000
+stored data size(B): 3000000000
+deduplication ratio: 0.0000, 1.0000
+total time(s): 3.682
+throughput(MB/s): 777.02
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.707s, 4046.39MB/s
+chunk_time : 2.193s, 1304.70MB/s
+hash_time : 1.206s, 2372.46MB/s
+dedup_time : 0.113s, 25316.55MB/s
+rewrite_time : 0.011s, 256939.65MB/s
+filter_time : 1.558s, 1836.06MB/s
+write_time : 1.878s, 1523.74MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 6858624
+the number of live containers: 725
+the number of chunks: 214332
+the number of stored chunks: 214332
+the size of data (B): 3000000000
+the size of stored data (B): 3000000000
+the size of saved data (B): 0
+deduplication ratio: 0.0000, 1.0000
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ******************SYN********************
 ==================SYN_fastcdc===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 232 segments of 1020 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 674 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/SYN
+number of files: 1
+number of chunks: 236717 (11830 bytes on average)
+number of unique chunks: 236717
+total size(B): 2800568320
+stored data size(B): 2800568320
+deduplication ratio: 0.0000, 1.0000
+total time(s): 2.133
+throughput(MB/s): 1252.33
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.585s, 4564.65MB/s
+chunk_time : 0.809s, 3300.43MB/s
+hash_time : 1.148s, 2325.89MB/s
+dedup_time : 0.123s, 21783.84MB/s
+rewrite_time : 0.011s, 242780.66MB/s
+filter_time : 1.516s, 1762.01MB/s
+write_time : 1.747s, 1529.23MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 7574944
+the number of live containers: 674
+the number of chunks: 236717
+the number of stored chunks: 236717
+the size of data (B): 2800568320
+the size of stored data (B): 2800568320
+the size of saved data (B): 0
+deduplication ratio: 0.0000, 1.0000
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================SYN_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 195 segments of 1019 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 675 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/SYN
+number of files: 1
+number of chunks: 198779 (14088 bytes on average)
+number of unique chunks: 198779
+total size(B): 2800568320
+stored data size(B): 2800568320
+deduplication ratio: 0.0000, 1.0000
+total time(s): 5.857
+throughput(MB/s): 455.98
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.853s, 3130.34MB/s
+chunk_time : 4.471s, 597.33MB/s
+hash_time : 1.106s, 2415.08MB/s
+dedup_time : 0.189s, 14104.44MB/s
+rewrite_time : 0.015s, 174861.21MB/s
+filter_time : 1.690s, 1580.17MB/s
+write_time : 2.230s, 1197.46MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 6360928
+the number of live containers: 675
+the number of chunks: 198779
+the number of stored chunks: 198779
+the size of data (B): 2800568320
+the size of stored data (B): 2800568320
+the size of saved data (B): 0
+deduplication ratio: 0.0000, 1.0000
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================SYN_normalized_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 232 segments of 1021 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 674 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/SYN
+number of files: 1
+number of chunks: 236964 (11818 bytes on average)
+number of unique chunks: 236964
+total size(B): 2800568320
+stored data size(B): 2800568320
+deduplication ratio: 0.0000, 1.0000
+total time(s): 5.232
+throughput(MB/s): 510.53
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.843s, 3167.72MB/s
+chunk_time : 3.872s, 689.81MB/s
+hash_time : 1.130s, 2362.99MB/s
+dedup_time : 0.109s, 24473.61MB/s
+rewrite_time : 0.015s, 180388.36MB/s
+filter_time : 1.765s, 1512.85MB/s
+write_time : 2.241s, 1191.69MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 7582848
+the number of live containers: 674
+the number of chunks: 236964
+the number of stored chunks: 236964
+the size of data (B): 2800568320
+the size of stored data (B): 2800568320
+the size of saved data (B): 0
+deduplication ratio: 0.0000, 1.0000
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================SYN_ae===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 219 segments of 1021 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 675 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/SYN
+number of files: 1
+number of chunks: 223713 (12518 bytes on average)
+number of unique chunks: 223713
+total size(B): 2800568320
+stored data size(B): 2800568320
+deduplication ratio: 0.0000, 1.0000
+total time(s): 3.639
+throughput(MB/s): 733.92
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.647s, 4128.53MB/s
+chunk_time : 2.090s, 1277.77MB/s
+hash_time : 1.207s, 2211.87MB/s
+dedup_time : 0.094s, 28493.11MB/s
+rewrite_time : 0.012s, 220365.52MB/s
+filter_time : 1.636s, 1632.86MB/s
+write_time : 1.979s, 1349.68MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 7158816
+the number of live containers: 675
+the number of chunks: 223713
+the number of stored chunks: 223713
+the size of data (B): 2800568320
+the size of stored data (B): 2800568320
+the size of saved data (B): 0
+deduplication ratio: 0.0000, 1.0000
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ******************TAR********************
 ==================TAR_fastcdc===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 44 segments of 1020 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 131 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/TAR
+number of files: 1
+number of chunks: 44903 (12579 bytes on average)
+number of unique chunks: 43074
+total size(B): 564879360
+stored data size(B): 542375656
+deduplication ratio: 0.0398, 1.0415
+total time(s): 0.520
+throughput(MB/s): 1035.54
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.132s, 4095.38MB/s
+chunk_time : 0.180s, 2996.65MB/s
+hash_time : 0.230s, 2346.64MB/s
+dedup_time : 0.052s, 10435.89MB/s
+rewrite_time : 0.002s, 252441.86MB/s
+filter_time : 0.335s, 1609.25MB/s
+write_time : 0.359s, 1499.45MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 1378368
+the number of live containers: 131
+the number of chunks: 44903
+the number of stored chunks: 43074
+the size of data (B): 564879360
+the size of stored data (B): 542375656
+the size of saved data (B): 22503704
+deduplication ratio: 0.0398, 1.0415
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================TAR_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 34 segments of 1007 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 131 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/TAR
+number of files: 1
+number of chunks: 34269 (16483 bytes on average)
+number of unique chunks: 32812
+total size(B): 564879360
+stored data size(B): 543514392
+deduplication ratio: 0.0378, 1.0393
+total time(s): 1.236
+throughput(MB/s): 436.01
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.199s, 2707.24MB/s
+chunk_time : 0.914s, 589.28MB/s
+hash_time : 0.254s, 2119.25MB/s
+dedup_time : 0.044s, 12239.54MB/s
+rewrite_time : 0.003s, 206086.82MB/s
+filter_time : 0.376s, 1433.83MB/s
+write_time : 0.468s, 1151.10MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 1049984
+the number of live containers: 131
+the number of chunks: 34269
+the number of stored chunks: 32812
+the size of data (B): 564879360
+the size of stored data (B): 543514392
+the size of saved data (B): 21364968
+deduplication ratio: 0.0378, 1.0393
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================TAR_normalized_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 45 segments of 1021 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 131 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/TAR
+number of files: 1
+number of chunks: 45956 (12291 bytes on average)
+number of unique chunks: 44164
+total size(B): 564879360
+stored data size(B): 542986624
+deduplication ratio: 0.0388, 1.0403
+total time(s): 1.310
+throughput(MB/s): 411.23
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.193s, 2790.60MB/s
+chunk_time : 0.793s, 679.59MB/s
+hash_time : 0.243s, 2218.34MB/s
+dedup_time : 0.054s, 9905.87MB/s
+rewrite_time : 0.003s, 175361.63MB/s
+filter_time : 0.344s, 1564.37MB/s
+write_time : 0.435s, 1239.81MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 1413248
+the number of live containers: 131
+the number of chunks: 45956
+the number of stored chunks: 44164
+the size of data (B): 564879360
+the size of stored data (B): 542986624
+the size of saved data (B): 21892736
+deduplication ratio: 0.0388, 1.0403
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================TAR_ae===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 28 segments of 1005 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 133 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/TAR
+number of files: 1
+number of chunks: 28157 (20061 bytes on average)
+number of unique chunks: 26981
+total size(B): 564879360
+stored data size(B): 546289850
+deduplication ratio: 0.0329, 1.0340
+total time(s): 0.712
+throughput(MB/s): 756.20
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.142s, 3793.15MB/s
+chunk_time : 0.410s, 1313.24MB/s
+hash_time : 0.224s, 2403.22MB/s
+dedup_time : 0.038s, 14103.49MB/s
+rewrite_time : 0.002s, 320089.68MB/s
+filter_time : 0.301s, 1787.26MB/s
+write_time : 0.379s, 1422.86MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 863392
+the number of live containers: 133
+the number of chunks: 28157
+the number of stored chunks: 26981
+the size of data (B): 564879360
+the size of stored data (B): 546289850
+the size of saved data (B): 18589510
+deduplication ratio: 0.0329, 1.0340
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ******************VMA********************
 ==================VMA_fastcdc===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 125 segments of 1021 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 358 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/VMA
+number of files: 1
+number of chunks: 127651 (12743 bytes on average)
+number of unique chunks: 116103
+total size(B): 1626669056
+stored data size(B): 1484156456
+deduplication ratio: 0.0876, 1.0960
+total time(s): 1.527
+throughput(MB/s): 1015.66
+number of zero chunks: 27
+size of zero chunks: 1769472
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.400s, 3875.91MB/s
+chunk_time : 0.562s, 2759.33MB/s
+hash_time : 0.610s, 2543.37MB/s
+dedup_time : 0.368s, 4215.12MB/s
+rewrite_time : 0.006s, 249768.56MB/s
+filter_time : 0.873s, 1777.85MB/s
+write_time : 1.051s, 1475.57MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 3715296
+the number of live containers: 358
+the number of chunks: 127651
+the number of stored chunks: 116103
+the size of data (B): 1626669056
+the size of stored data (B): 1484156456
+the size of saved data (B): 142512600
+deduplication ratio: 0.0876, 1.0960
+the number of zero chunks: 27
+the size of zero chunks (B): 1769472
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================VMA_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 101 segments of 1023 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 359 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/VMA
+number of files: 1
+number of chunks: 103408 (15730 bytes on average)
+number of unique chunks: 93059
+total size(B): 1626669056
+stored data size(B): 1487200598
+deduplication ratio: 0.0857, 1.0938
+total time(s): 3.506
+throughput(MB/s): 442.47
+number of zero chunks: 26
+size of zero chunks: 1703936
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.575s, 2697.01MB/s
+chunk_time : 2.744s, 565.43MB/s
+hash_time : 0.572s, 2713.91MB/s
+dedup_time : 0.385s, 4032.81MB/s
+rewrite_time : 0.009s, 170230.71MB/s
+filter_time : 0.962s, 1613.15MB/s
+write_time : 1.480s, 1048.37MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 2977888
+the number of live containers: 359
+the number of chunks: 103408
+the number of stored chunks: 93059
+the size of data (B): 1626669056
+the size of stored data (B): 1487200598
+the size of saved data (B): 139468458
+deduplication ratio: 0.0857, 1.0938
+the number of zero chunks: 26
+the size of zero chunks (B): 1703936
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================VMA_normalized_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 126 segments of 1018 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 357 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/VMA
+number of files: 1
+number of chunks: 128388 (12669 bytes on average)
+number of unique chunks: 116648
+total size(B): 1626669056
+stored data size(B): 1481457624
+deduplication ratio: 0.0893, 1.0980
+total time(s): 3.217
+throughput(MB/s): 482.27
+number of zero chunks: 26
+size of zero chunks: 1703936
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.596s, 2601.01MB/s
+chunk_time : 2.370s, 654.47MB/s
+hash_time : 0.676s, 2293.33MB/s
+dedup_time : 0.417s, 3717.78MB/s
+rewrite_time : 0.009s, 176586.51MB/s
+filter_time : 1.029s, 1507.19MB/s
+write_time : 1.353s, 1146.85MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 3732736
+the number of live containers: 357
+the number of chunks: 128388
+the number of stored chunks: 116648
+the size of data (B): 1626669056
+the size of stored data (B): 1481457624
+the size of saved data (B): 145211432
+deduplication ratio: 0.0893, 1.0980
+the number of zero chunks: 26
+the size of zero chunks (B): 1703936
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================VMA_ae===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 83 segments of 1019 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 372 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/VMA
+number of files: 1
+number of chunks: 84626 (19221 bytes on average)
+number of unique chunks: 76868
+total size(B): 1626669056
+stored data size(B): 1534259826
+deduplication ratio: 0.0568, 1.0602
+total time(s): 2.130
+throughput(MB/s): 728.48
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.419s, 3703.42MB/s
+chunk_time : 1.244s, 1247.33MB/s
+hash_time : 0.637s, 2433.56MB/s
+dedup_time : 0.300s, 5177.88MB/s
+rewrite_time : 0.005s, 292369.49MB/s
+filter_time : 0.841s, 1844.61MB/s
+write_time : 1.165s, 1331.89MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 2459776
+the number of live containers: 372
+the number of chunks: 84626
+the number of stored chunks: 76868
+the size of data (B): 1626669056
+the size of stored data (B): 1534259826
+the size of saved data (B): 92409230
+deduplication ratio: 0.0568, 1.0602
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ******************VMB********************
 ==================VMB_fastcdc===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 212 segments of 1021 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 683 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/VMB
+number of files: 1
+number of chunks: 216620 (13849 bytes on average)
+number of unique chunks: 204746
+total size(B): 3000000000
+stored data size(B): 2835981533
+deduplication ratio: 0.0547, 1.0578
+total time(s): 3.297
+throughput(MB/s): 867.77
+number of zero chunks: 284
+size of zero chunks: 18612224
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.789s, 3626.97MB/s
+chunk_time : 1.137s, 2515.49MB/s
+hash_time : 1.084s, 2639.32MB/s
+dedup_time : 0.930s, 3077.41MB/s
+rewrite_time : 0.011s, 257008.89MB/s
+filter_time : 1.485s, 1926.73MB/s
+write_time : 2.103s, 1360.14MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 6551872
+the number of live containers: 683
+the number of chunks: 216620
+the number of stored chunks: 204746
+the size of data (B): 3000000000
+the size of stored data (B): 2835981533
+the size of saved data (B): 164018467
+deduplication ratio: 0.0547, 1.0578
+the number of zero chunks: 284
+the size of zero chunks (B): 18612224
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================VMB_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 165 segments of 1017 chunks on average
+rewrite phase stops successfully!
+Record 0 sparse containers, and 0 of them are inherited
+CMA: update 684 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/VMB
+number of files: 1
+number of chunks: 167950 (17862 bytes on average)
+number of unique chunks: 157280
+total size(B): 3000000000
+stored data size(B): 2836458135
+deduplication ratio: 0.0545, 1.0577
+total time(s): 6.759
+throughput(MB/s): 423.27
+number of zero chunks: 281
+size of zero chunks: 18415616
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.908s, 3149.50MB/s
+chunk_time : 5.288s, 541.00MB/s
+hash_time : 1.602s, 1786.27MB/s
+dedup_time : 1.194s, 2395.91MB/s
+rewrite_time : 0.012s, 240401.89MB/s
+filter_time : 1.784s, 1603.68MB/s
+write_time : 2.733s, 1046.94MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 5032960
+the number of live containers: 684
+the number of chunks: 167950
+the number of stored chunks: 157280
+the size of data (B): 3000000000
+the size of stored data (B): 2836458135
+the size of saved data (B): 163541865
+deduplication ratio: 0.0545, 1.0577
+the number of zero chunks: 281
+the size of zero chunks (B): 18415616
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================VMB_normalized_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 215 segments of 1020 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 684 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/VMB
+number of files: 1
+number of chunks: 219443 (13670 bytes on average)
+number of unique chunks: 207777
+total size(B): 3000000000
+stored data size(B): 2837404709
+deduplication ratio: 0.0542, 1.0573
+total time(s): 6.101
+throughput(MB/s): 468.98
+number of zero chunks: 283
+size of zero chunks: 18546688
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.912s, 3135.79MB/s
+chunk_time : 4.399s, 650.35MB/s
+hash_time : 1.222s, 2342.09MB/s
+dedup_time : 1.120s, 2554.99MB/s
+rewrite_time : 0.016s, 182300.43MB/s
+filter_time : 1.826s, 1566.86MB/s
+write_time : 2.305s, 1241.44MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 6648864
+the number of live containers: 684
+the number of chunks: 219443
+the number of stored chunks: 207777
+the size of data (B): 3000000000
+the size of stored data (B): 2837404709
+the size of saved data (B): 162595291
+deduplication ratio: 0.0542, 1.0573
+the number of zero chunks: 283
+the size of zero chunks (B): 18546688
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================VMB_ae===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 106 segments of 1016 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 705 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/VMB
+number of files: 1
+number of chunks: 107762 (27839 bytes on average)
+number of unique chunks: 99902
+total size(B): 3000000000
+stored data size(B): 2883486747
+deduplication ratio: 0.0388, 1.0404
+total time(s): 3.765
+throughput(MB/s): 759.95
+number of zero chunks: 1
+size of zero chunks: 65536
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.701s, 4080.10MB/s
+chunk_time : 2.157s, 1326.10MB/s
+hash_time : 1.085s, 2637.52MB/s
+dedup_time : 0.601s, 4756.58MB/s
+rewrite_time : 0.007s, 434475.77MB/s
+filter_time : 1.662s, 1721.87MB/s
+write_time : 2.060s, 1389.16MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 3196864
+the number of live containers: 705
+the number of chunks: 107762
+the number of stored chunks: 99902
+the size of data (B): 3000000000
+the size of stored data (B): 2883486747
+the size of saved data (B): 116513253
+deduplication ratio: 0.0388, 1.0404
+the number of zero chunks: 1
+the size of zero chunks (B): 65536
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ******************WEB********************
 ==================WEB_fastcdc===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 235 segments of 1020 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 463 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/WEB
+number of files: 1
+number of chunks: 239848 (12052 bytes on average)
+number of unique chunks: 156641
+total size(B): 2890680320
+stored data size(B): 1920352276
+deduplication ratio: 0.3357, 1.5053
+total time(s): 2.888
+throughput(MB/s): 954.48
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.699s, 3943.64MB/s
+chunk_time : 0.949s, 2905.63MB/s
+hash_time : 1.102s, 2501.34MB/s
+dedup_time : 1.010s, 2729.25MB/s
+rewrite_time : 0.013s, 205162.43MB/s
+filter_time : 1.361s, 2026.20MB/s
+write_time : 1.341s, 2055.92MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 5012512
+the number of live containers: 463
+the number of chunks: 239848
+the number of stored chunks: 156641
+the size of data (B): 2890680320
+the size of stored data (B): 1920352276
+the size of saved data (B): 970328044
+deduplication ratio: 0.3357, 1.5053
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================WEB_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 188 segments of 1018 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 513 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/WEB
+number of files: 1
+number of chunks: 191528 (15092 bytes on average)
+number of unique chunks: 124416
+total size(B): 2890680320
+stored data size(B): 2125597116
+deduplication ratio: 0.2647, 1.3599
+total time(s): 6.277
+throughput(MB/s): 439.19
+number of zero chunks: 1
+size of zero chunks: 6977
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.935s, 2949.04MB/s
+chunk_time : 4.817s, 572.27MB/s
+hash_time : 1.370s, 2012.12MB/s
+dedup_time : 1.150s, 2398.22MB/s
+rewrite_time : 0.023s, 119428.48MB/s
+filter_time : 1.700s, 1621.70MB/s
+write_time : 2.289s, 1204.31MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 3981312
+the number of live containers: 513
+the number of chunks: 191528
+the number of stored chunks: 124416
+the size of data (B): 2890680320
+the size of stored data (B): 2125597116
+the size of saved data (B): 765083204
+deduplication ratio: 0.2647, 1.3599
+the number of zero chunks: 1
+the size of zero chunks (B): 6977
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================WEB_normalized_rabin===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 232 segments of 1022 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 472 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/WEB
+number of files: 1
+number of chunks: 237262 (12183 bytes on average)
+number of unique chunks: 160685
+total size(B): 2890680320
+stored data size(B): 1957338922
+deduplication ratio: 0.3229, 1.4768
+total time(s): 5.627
+throughput(MB/s): 489.91
+number of zero chunks: 1
+size of zero chunks: 6977
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.862s, 3198.27MB/s
+chunk_time : 4.050s, 680.68MB/s
+hash_time : 1.150s, 2397.56MB/s
+dedup_time : 1.004s, 2745.66MB/s
+rewrite_time : 0.022s, 127186.51MB/s
+filter_time : 1.549s, 1779.56MB/s
+write_time : 2.084s, 1322.56MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 5141920
+the number of live containers: 472
+the number of chunks: 237262
+the number of stored chunks: 160685
+the size of data (B): 2890680320
+the size of stored data (B): 1957338922
+the size of saved data (B): 933341398
+deduplication ratio: 0.3229, 1.4768
+the number of zero chunks: 1
+the size of zero chunks (B): 6977
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
 ==================WEB_ae===================
 --------------------8k--------------------
+Init recipe store successfully
+Init container store successfully
+Init index module successfully
+==== backup begin ====
+Read 0 inherited sparse containers
+read phase stops successfully!
+chunk phase stops successfully!
+hash phase stops successfully!
+dedup phase stops successfully: 220 segments of 1021 chunks on average
+rewrite phase stops successfully!
+Record 1 sparse containers, and 0 of them are inherited
+CMA: update 511 records.
+filter phase stops successfully!
+flushing hash table!
+flushing hash table successfully!
+append phase stops successfully!
+==== backup end ====
+job id: 0
+backup path: /home/zxy/dedup_datasets/WEB
+number of files: 1
+number of chunks: 224825 (12857 bytes on average)
+number of unique chunks: 149683
+total size(B): 2890680320
+stored data size(B): 2119389423
+deduplication ratio: 0.2668, 1.3639
+total time(s): 4.330
+throughput(MB/s): 636.61
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 0.790s, 3488.46MB/s
+chunk_time : 2.226s, 1238.60MB/s
+hash_time : 1.188s, 2319.96MB/s
+dedup_time : 1.044s, 2640.14MB/s
+rewrite_time : 0.016s, 175021.75MB/s
+filter_time : 1.445s, 1908.00MB/s
+write_time : 1.767s, 1560.53MB/s
+custom total duration:0.000000
+=== destor stat ===
+the index memory footprint (B): 4789856
+the number of live containers: 511
+the number of chunks: 224825
+the number of stored chunks: 149683
+the size of data (B): 2890680320
+the size of stored data (B): 2119389423
+the size of saved data (B): 771290897
+deduplication ratio: 0.2668, 1.3639
+the number of zero chunks: 0
+the size of zero chunks (B): 0
+the number of rewritten chunks: 0
+the size of rewritten chunks (B): 0
+rewrite ratio: 0.0000
+simulation level is NO
+=== destor stat ===
+epoch done.
