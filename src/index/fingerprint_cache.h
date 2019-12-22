@@ -12,4 +12,8 @@ void init_fingerprint_cache();
 int64_t fingerprint_cache_lookup(fingerprint *fp);
 void fingerprint_cache_prefetch(int64_t id);
 
+//feature is used for chosen arm when need feedback
+void LIPA_fingerprint_cache_prefetch(int64_t id, char* feature);
+struct ctxtTableItem* LIPA_prefetch_item(char* feature, int64_t id);
+void LIPA_cache_update(fingerprint* fp, containerid id);
 #endif /* FINGERPRINT_CACHE_H_ */

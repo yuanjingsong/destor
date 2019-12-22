@@ -27,6 +27,7 @@ int index_lookup(struct segment*);
  * Insert/update fingerprints.
  */
 void index_update(GHashTable *features, int64_t id);
+void LIPA_cache_update_index(struct segment* s);
 
 void index_delete(fingerprint *fp, int64_t id);
 
@@ -37,6 +38,7 @@ int index_update_buffer(struct segment *s);
 
 extern GHashTable* (*sampling)(GSequence *chunks, int32_t chunk_num);
 extern struct segment* (*segmenting)(struct chunk *c);
+
 
 gboolean g_feature_equal(char* a, char* b);
 guint g_feature_hash(char *feature);

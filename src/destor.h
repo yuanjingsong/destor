@@ -153,6 +153,9 @@
 #define INDEX_SPECIFIC_SAMPLED 5
 #define INDEX_SPECIFIC_BLOCK_LOCALITY_CACHING 6
 
+// my own index function
+#define INDEX_SPECIFIC_LIPA 7
+
 #define RESTORE_CACHE_LRU 0
 #define RESTORE_CACHE_OPT 1
 #define RESTORE_CACHE_ASM 2
@@ -209,7 +212,14 @@ struct destor {
 	/* Specify fingerprint index,
 	 * exact or near-exact,
 	 * physical logical locality */
+
+	/*
+	 * [0] specifies exact or near-exact;
+	 * [1] specifies physical or logical locality
+	 */
+
 	int index_category[2];
+
 	/* optional */
 	int index_specific;
 
@@ -299,15 +309,65 @@ struct segment {
 	/* The actual number because there are signal chunks. */
 	int32_t chunk_num;
 	GSequence *chunks;
+	//features is a hashTable
+	// key is feature
+	// value is NULL
 	GHashTable* features;
 };
+
+
+struct ctxtTableItem {
+	//segmentid segment_id;
+	struct segment* segment_ptr;
+
+	// id is used to identify context table item
+	int64_t id;
+
+	// followers records the number of which should be prefetched in cache
+	int followers;
+
+	// score influences the select champion.
+	// DEFAULT score is 4
+	double score;
+	int update_time;
+};
+
+int ItemId;
+
+struct LIPA_cacheItem {
+	// id is ctxtTableItem id
+	int64_t id;
+
+	struct ctxtTableItem* tableItemPtr;
+
+	// k is fingerprint and value is container id
+	// kvpairs records every chunk in segment its fingerprint and container id
+	// each cache item means a segment
+	// when feature has no corresponding container id , it will be TEMPORARY_ID otherwise it will be the container id
+	GHashTable* kvpairs;
+
+	// hit_score records the segment hit counts
+	int hit_score;
+
+	//TODO: whether need flag?
+
+	//flag means it is champion or followers
+	int flag;
+};
+
+
 
 struct chunk* new_chunk(int32_t);
 void free_chunk(struct chunk*);
 
 struct segment* new_segment();
 struct segment* new_segment_full();
+struct segment* copy_segment(struct segment* src, struct segment* dst);
 void free_segment(struct segment* s);
+
+struct ctxtTableItem* new_ctxtTableItem(struct segment* segment);
+
+void free_ctxtTableItem(struct ctxtTableItem* item);
 
 gboolean g_fingerprint_equal(fingerprint* fp1, fingerprint* fp2);
 gint g_fingerprint_cmp(fingerprint* fp1, fingerprint* fp2, gpointer user_data);

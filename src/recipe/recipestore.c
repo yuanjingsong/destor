@@ -90,6 +90,7 @@ struct backupVersion* create_backup_version(const char *path) {
 	fname = sdscat(fname, ".meta");
 	if ((b->metadata_fp = fopen(fname, "w")) == 0) {
 		fprintf(stderr, "Can not create bv%d.meta!\n", b->bv_num);
+		fprintf("Trying create file at %s, you can check the path\n", fname);
 		exit(1);
 	}
 
@@ -518,11 +519,18 @@ void segment_recipe_foreach(struct segmentRecipe* sr, void (*func)(fingerprint*,
 	}
 }
 
+/**
+ *
+ * @param id is a segment id
+ * @param prefetch_num is the number of prefetch segments number
+ * @return return prefetched segment recipe list
+ */
+
 GQueue* prefetch_segments(segmentid id, int prefetch_num) {
 	static struct backupVersion *opened_bv;
 
 	if (id == TEMPORARY_ID) {
-		assert(id != TEMPORARY_ID);
+		//assert(id != TEMPORARY_ID);
 		return NULL;
 	}
 

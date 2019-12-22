@@ -29,7 +29,7 @@ struct option long_options[] = {
 		{ "help", 0, NULL, 'h' },
 		{ NULL, 0, NULL, 0 }
 };
-
+ItemId;
 void usage() {
 	puts("GENERAL USAGE");
 	puts("\tstart a backup job");
@@ -318,7 +318,6 @@ int main(int argc, char **argv) {
 		 * */
 		if(destor.backup_retention_time >= 0
 				&& jcr.id >= destor.backup_retention_time){
-			NOTICE("GC is running!");
 			do_delete(jcr.id - destor.backup_retention_time);
 		}
 
@@ -386,6 +385,30 @@ void free_chunk(struct chunk* ck) {
 	free(ck);
 }
 
+struct ctxtTableItem* new_ctxtTableItem(struct segment* segment){
+    assert(segment);
+	struct ctxtTableItem* newItem = (struct ctxtTableitem*) malloc(sizeof(struct ctxtTableItem));
+	newItem ->followers = 4;
+	newItem ->score = 0;
+
+	struct segment* newSeg = new_segment();
+	newSeg->features = g_hash_table_new_full(g_feature_hash, g_feature_equal, free, NULL);
+	newSeg = copy_segment(segment, newSeg);
+	newItem -> segment_ptr = newSeg;
+
+	newItem ->update_time = 0;
+	newItem ->id = ItemId++;
+	return newItem;
+}
+
+void free_ctxtTableItem(struct ctxtTableItem* item) {
+	printf("free contxttable item\n");
+	free_segment(item->segment_ptr);
+	item->segment_ptr = NULL;
+    free(item);
+}
+
+
 struct segment* new_segment() {
 	struct segment * s = (struct segment*) malloc(sizeof(struct segment));
 	s->id = TEMPORARY_ID;
@@ -395,6 +418,29 @@ struct segment* new_segment() {
 	return s;
 }
 
+struct segment* copy_segment(struct segment* src, struct segment* dst) {
+    dst ->chunk_num = src->chunk_num;
+   	dst->id = src->id;
+   	GSequenceIter* src_begin = g_sequence_get_begin_iter(src->chunks);
+   	GSequenceIter* src_end = g_sequence_get_end_iter(src->chunks);
+
+   	for (; src_begin != src_end; src_begin = g_sequence_iter_next(src_begin)) {
+   	    g_sequence_append(dst->chunks, g_sequence_get(src_begin));
+   	}
+   	GHashTableIter iter;
+   	gpointer key, val;
+	assert(src->features);
+   	g_hash_table_iter_init(&iter, src->features);
+
+   	while (g_hash_table_iter_next(&iter, &key, &val)) {
+   	    char* feature = malloc(destor.index_key_size);
+   	    memcpy(feature, (char*)key, destor.index_key_size);
+   		g_hash_table_insert(dst->features, feature, val);
+   	}
+
+   	return dst;
+}
+
 struct segment* new_segment_full(){
 	struct segment* s = new_segment();
 	s->features = g_hash_table_new_full(g_feature_hash, g_feature_equal, free, NULL);
@@ -402,6 +448,7 @@ struct segment* new_segment_full(){
 }
 
 void free_segment(struct segment* s) {
+	assert(s);
 	GSequenceIter *begin = g_sequence_get_begin_iter(s->chunks);
 	GSequenceIter *end = g_sequence_get_end_iter(s->chunks);
 	for(; begin != end; begin = g_sequence_get_begin_iter(s->chunks)){

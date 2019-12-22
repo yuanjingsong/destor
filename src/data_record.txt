@@ -1,0 +1,24 @@
+LIPA METHOD
+
+backup path: ../datatrace/fslhomes-user000-2015-04-10.8kb.hash.anon
+number of files: 100641
+number of chunks: 2121647 (8781 bytes on average)
+number of unique chunks: 2016361
+total size(B): 18631078497
+stored data size(B): 17488088001
+deduplication ratio: 0.0613, 1.0654
+total time(s): 7.872
+throughput(MB/s): 2257.23
+number of zero chunks: 0
+size of zero chunks: 0
+number of rewritten chunks: 0
+size of rewritten chunks: 0
+rewritten rate in size: 0.000
+read_time : 3.046s, 5833.75MB/s
+chunk_time : 0.000s, infMB/s
+hash_time : 0.000s, infMB/s
+dedup_time : 2.814s, 6313.79MB/s
+rewrite_time : 0.079s, 223868.32MB/s
+filter_time : 3.207s, 5539.84MB/s
+write_time : 0.524s, 33913.60MB/s
+custom total duration:0.061349

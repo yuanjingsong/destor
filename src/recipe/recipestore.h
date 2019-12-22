@@ -62,6 +62,7 @@ struct fileRecipeMeta {
  * Each recipe consists of segments.
  * Each prefetched segment is organized as a hash table for optimizing lookup.
  * It is the basic unit of logical locality.
+ * kvpairs: key => fingerprints and value => chunkPointer
  * */
 struct segmentRecipe {
 	segmentid id;

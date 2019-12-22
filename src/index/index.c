@@ -5,6 +5,8 @@
 #include "../storage/containerstore.h"
 #include "../recipe/recipestore.h"
 #include "../jcr.h"
+#include "ctxtTable.h"
+#include "../utils/lru_cache.h"
 
 struct index_overhead index_overhead;
 
@@ -21,6 +23,11 @@ guint g_feature_hash(char *feature){
 	}
 	return hash;
 }
+
+//ctxtTable is k-v table
+// key => feature
+// value => GList which consists of ctxtTableItem
+GHashTable* ctxtTable;
 
 extern void init_segmenting_method();
 extern void init_sampling_method();
@@ -89,6 +96,23 @@ void init_index() {
                 destor.index_segment_prefech : 16;
                 break;
             }
+
+            case INDEX_SPECIFIC_LIPA: {
+                destor.index_category[0] = INDEX_CATEGORY_NEAR_EXACT;
+                destor.index_category[1] = INDEX_CATEGORY_LOGICAL_LOCALITY;
+
+                destor.index_segment_algorithm[0] = INDEX_SEGMENT_CONTENT_DEFINED;
+                destor.index_segment_selection_method[0] = INDEX_SEGMENT_SELECT_TOP;
+
+                destor.index_sampling_method[0] = INDEX_SAMPLING_MIN;
+                destor.index_sampling_method[1] = destor.index_sampling_method[1] >= 1 ?
+                                                  destor.index_sampling_method[1] : 128;
+
+                destor.index_segment_prefech = 1;
+                break;
+
+            }
+
             default:{
                 WARNING("Invalid index specific!");
                 exit(1);
@@ -112,6 +136,10 @@ void init_index() {
 
     init_sampling_method();
     init_segmenting_method();
+
+    if (destor.index_specific == INDEX_SPECIFIC_LIPA) {
+        init_ctxtTable();
+    }
 
     init_kvstore();
 
@@ -216,6 +244,7 @@ static void index_lookup_base(struct segment *s){
 }
 
 extern void index_lookup_similarity_detection(struct segment *s);
+extern void lipa_index_lookup(struct segment *s);
 
 extern struct {
     /* g_mutex_init() is unnecessary if in static storage. */
@@ -240,13 +269,18 @@ int index_lookup(struct segment* s) {
         return 0;
     }
 
+
     TIMER_DECLARE(1);
     TIMER_BEGIN(1);
     if(destor.index_category[1] == INDEX_CATEGORY_LOGICAL_LOCALITY
             && destor.index_segment_selection_method[0] != INDEX_SEGMENT_SELECT_BASE){
         /* Similarity-based */
         s->features = sampling(s->chunks, s->chunk_num);
-        index_lookup_similarity_detection(s);
+        if (destor.index_specific == INDEX_SPECIFIC_LIPA) {
+            lipa_index_lookup(s);
+        }else {
+            index_lookup_similarity_detection(s);
+        }
     }else{
         /* Base */
         index_lookup_base(s);
@@ -260,13 +294,18 @@ int index_lookup(struct segment* s) {
  * Input features with a container/segment ID.
  * For physical locality, this function is called for each written container.
  * For logical locality, this function is called for each written segment.
+ * features is a hashTable
+ *
  */
 void index_update(GHashTable *features, int64_t id){
-    VERBOSE("Filter phase: update %d features", g_hash_table_size(features));
+    NOTICE("Filter phase: update %d features\n", g_hash_table_size(features));
+    assert(features);
     GHashTableIter iter;
     gpointer key, value;
     g_hash_table_iter_init(&iter, features);
     while (g_hash_table_iter_next(&iter, &key, &value)) {
+        // key is feature
+        //id is container id
         index_overhead.update_requests++;
         kvstore_update(key, id);
     }
@@ -350,5 +389,23 @@ int index_update_buffer(struct segment *s){
                 index_buffer.chunk_num);
         return 0;
     }
+    printf("INDEX UPDATE BUFFER DONE\n");
     return 1;
+}
+
+void LIPA_cache_update_index(struct segment* s) {
+    GSequenceIter* chunkIter = g_sequence_get_begin_iter(s ->chunks);
+    GSequenceIter* end = g_sequence_get_end_iter(s->chunks);
+
+    for (; chunkIter != end; chunkIter = g_sequence_iter_next(chunkIter)) {
+        struct chunk* c = g_sequence_get(chunkIter);
+
+        if (CHECK_CHUNK(c, CHUNK_FILE_START) || CHECK_CHUNK(c, CHUNK_FILE_END))
+            continue;
+
+        // which means chunk has container id
+        assert(c->id != TEMPORARY_ID) ;
+        LIPA_cache_update(&c->fp, c->id);
+    }
+    printf("update chunk num is %d \n", s->chunk_num);
 }

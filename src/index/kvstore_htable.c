@@ -68,6 +68,7 @@ void init_kvstore_htable(){
 
 	sds indexpath = sdsdup(destor.working_directory);
 	indexpath = sdscat(indexpath, "index/htable");
+	printf("KV Store path is %s", indexpath);
 
 	/* Initialize the feature index from the dump file. */
 	FILE *fp;

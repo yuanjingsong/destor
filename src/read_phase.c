@@ -5,6 +5,7 @@
 static pthread_t read_t;
 
 static void read_file(sds path) {
+
 	static unsigned char buf[DEFAULT_BLOCK_SIZE];
 
 	sds filename = sdsdup(path);

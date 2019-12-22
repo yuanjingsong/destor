@@ -9,8 +9,17 @@
 #include <stdio.h>
 #include <string.h>
 #include "lru_cache.h"
+#include "destor.h"
 
-/*
+
+/**
+ * lruCache data structure records the item queue in lru->elem_queue and its type is GList*
+ * so if you want to check an item whether in lruCache
+ * you should iter the lruCache->elem_queue
+ * the element of (lruCache -> elem_queue) is the logical element of a lru queue
+ */
+
+/**
  * The container read cache.
  */
 struct lruCache* new_lru_cache(int size, void (*free_elem)(void *),
@@ -35,7 +44,11 @@ void free_lru_cache(struct lruCache* c) {
 	free(c);
 }
 
-/* find a item in cache matching the condition */
+/** find a item in cache matching the condition
+ * at fingerprint_cache stage, user_data is fingerprint
+ * so you should iter c->element_queue, and check each element of queue one by one
+ */
+
 void* lru_cache_lookup(struct lruCache* c, void* user_data) {
 	GList* elem = g_list_first(c->elem_queue);
 	while (elem) {
@@ -69,6 +82,7 @@ void* lru_cache_lookup_without_update(struct lruCache* c, void* user_data) {
 }
 /*
  * Hit an existing elem for simulating an insertion of it.
+ * if hit an existing element then simulate an insertion of it
  */
 void* lru_cache_hits(struct lruCache* c, void* user_data,
 		int (*hit)(void* elem, void* user_data)) {
@@ -89,6 +103,8 @@ void* lru_cache_hits(struct lruCache* c, void* user_data,
 
 /*
  * We know that the data does not exist!
+ * if you want to do anything about victim when victim is evicted
+ * it will call func(victim, user_data)
  */
 void lru_cache_insert(struct lruCache *c, void* data,
 		void (*func)(void*, void*), void* user_data) {

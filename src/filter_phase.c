@@ -32,7 +32,11 @@ static void* filter_thread(void *arg) {
     struct fileRecipeMeta* r = NULL;
 
     while (1) {
+    	// if algorithm has no rewrite policy
+    	// the rewrite_queue element is dedup phase element
         struct chunk* c = sync_queue_pop(rewrite_queue);
+
+        //continue;
 
         if (c == NULL)
             /* backup job finish */
@@ -77,6 +81,7 @@ static void* filter_thread(void *arg) {
 
     	GSequenceIter *iter = g_sequence_get_begin_iter(s->chunks);
     	GSequenceIter *end = g_sequence_get_end_iter(s->chunks);
+
         for (; iter != end; iter = g_sequence_iter_next(iter)) {
             c = g_sequence_get(iter);
 
@@ -86,6 +91,7 @@ static void* filter_thread(void *arg) {
             VERBOSE("Filter phase: %dth chunk in %s container %lld", chunk_num,
                     CHECK_CHUNK(c, CHUNK_OUT_OF_ORDER) ? "out-of-order" : "", c->id);
 
+            // REWRTIE PHASE
             /* Cache-Aware Filter */
             if (destor.rewrite_enable_cache_aware && restore_aware_contains(c->id)) {
                 assert(c->id != TEMPORARY_ID);
@@ -93,6 +99,7 @@ static void* filter_thread(void *arg) {
                 SET_CHUNK(c, CHUNK_IN_CACHE);
             }
 
+            // REWRITE PHASE
             /* A cfl-switch for rewriting out-of-order chunks. */
             if (destor.rewrite_enable_cfl_switch) {
                 double cfl = restore_aware_get_cfl();
@@ -290,6 +297,10 @@ static void* filter_thread(void *arg) {
          		}
          	}
          	index_update(s->features, sid);
+
+
+			if (destor.index_specific == INDEX_SPECIFIC_LIPA)
+				LIPA_cache_update_index(s);
          }
 
         free_segment(s);
@@ -337,7 +348,7 @@ void start_filter_phase() {
 
 void stop_filter_phase() {
     pthread_join(filter_t, NULL);
-    close_har();
+    //close_har();
 	NOTICE("filter phase stops successfully!");
 
 }

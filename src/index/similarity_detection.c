@@ -133,6 +133,8 @@ extern struct{
 	GSequence *chunks;
 } storage_buffer;
 
+// s is temporary segment, so s -> id is always -1
+// so at sparse indexing, top_segment_select() prefetch fingerprints
 void index_lookup_similarity_detection(struct segment *s){
 	assert(s->features);
 	top_segment_select(s->features);

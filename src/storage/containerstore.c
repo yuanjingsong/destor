@@ -425,6 +425,7 @@ void free_container_meta(struct containerMeta* cm) {
 }
 
 void free_container(struct container* c) {
+	printf("free container\n");
 	g_hash_table_destroy(c->meta.map);
 	if (c->data)
 		free(c->data);

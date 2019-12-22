@@ -91,8 +91,10 @@ void *dedup_thread(void *arg) {
 		} else {
 			VERBOSE("Dedup phase: an empty segment");
 		}
+
 		/* Send chunks in the segment to the next phase.
 		 * The segment will be cleared. */
+
 		send_segment(s);
 
 		free_segment(s);
@@ -104,12 +106,14 @@ void *dedup_thread(void *arg) {
 
 	sync_queue_term(dedup_queue);
 
+	jcr.status = JCR_STATUS_DONE;
 	return NULL;
 }
 
 void start_dedup_phase() {
 
 	if(destor.index_segment_algorithm[0] == INDEX_SEGMENT_CONTENT_DEFINED)
+	    // LIPA wait_threshold is 127
 		index_lock.wait_threshold = destor.rewrite_algorithm[1] + destor.index_segment_max - 1;
 	else if(destor.index_segment_algorithm[0] == INDEX_SEGMENT_FIXED)
 		index_lock.wait_threshold = destor.rewrite_algorithm[1] + destor.index_segment_algorithm[1] - 1;

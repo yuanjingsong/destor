@@ -15,7 +15,8 @@ include_directories(src/utils)
 #include_directories(/root/anaconda3/include/)
 include_directories(/usr/local/include/glib-2.0/)
 include_directories(/usr/local/lib/glib-2.0/include/)
-include_directories(/home/zxy/destor/isaInclude)
+#include_directories(/home/zxy/destor/isaInclude)
+include_directories(isaInclude)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3")
 
@@ -82,6 +83,8 @@ add_executable(destor
         src/restore_aware.c
         src/rewrite_phase.c
         src/rewrite_phase.h
-        src/trace_phase.c)
+        src/trace_phase.c
+        src/index/ctxtTable.c
+        src/index/ctxtTable.h src/index/lipa_cache.h src/index/lipa_cache.c)
 
 target_link_libraries(destor glib-2.0 pthread ssl crypto isal_crypto)
