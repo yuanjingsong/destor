@@ -22,6 +22,12 @@
 #define EPSILON_GREEDY_POLICY 1
 #define RANDOM_POLICY 2
 
+#ifdef DEBUG
+int count_duplicate_storage_buffer;
+int count_duplicate_cache;
+int count_duplicate_fingerprint_buffer;
+
+#endif
 
 
 extern GHashTable *ctxtTable;
@@ -33,6 +39,7 @@ extern struct {
 extern struct index_buffer index_buffer;
 extern struct index_overhead index_overhead;
 extern int ItemId;
+int hit;
 
 // At this function s-> id is always TEMPORARY_ID
 // for each chunk in (s -> chunks), chunk id is always TEMPORARY_ID
@@ -40,6 +47,7 @@ extern int ItemId;
 void lipa_index_lookup(struct segment *s) {
     assert(s->features);
     int policy = EPSILON_GREEDY_POLICY;
+    //int policy = RANDOM_POLICY;
     int CTXT_TABLE_ITEM_LENGTH = DEFAULT_LENGTH;
 
 
@@ -66,7 +74,7 @@ void lipa_index_lookup(struct segment *s) {
          * for each feature
          * map feature into context table
          * and choose champion
-         * and prefetch champion and its followers fingerprint into cache
+         * then prefetch champion and its followers fingerprint into cache
          */
 
         //key is fingerprint
@@ -75,11 +83,13 @@ void lipa_index_lookup(struct segment *s) {
 
 
         GList* ctxtList = NULL;
-        if (g_hash_table_contains(ctxtTable, (char*) key)) {
+        if (g_hash_table_contains(ctxtTable, (fingerprint *) key)) {
+            hit++;
             // this feature exist a ctxtTable List;
-            ctxtList = g_hash_table_lookup(ctxtTable, (char*) key);
+            ctxtList = g_hash_table_lookup(ctxtTable, (fingerprint *) key);
             int list_length = g_list_length(ctxtList);
-            if (list_length == CTXT_TABLE_ITEM_LENGTH) {
+            NOTICE("Length is %d ", list_length);
+            if (list_length >= CTXT_TABLE_ITEM_LENGTH) {
                 // correspond arm is full
                 // you should remove lowest score ctxtTableItem
                 struct ctxtTableItem *miniItem = find_mini_Item(ctxtList);
@@ -89,7 +99,7 @@ void lipa_index_lookup(struct segment *s) {
         }
 
         ctxtList = g_list_append(ctxtList, newItem);
-        g_hash_table_replace(ctxtTable, (char*) key, ctxtList);
+        g_hash_table_replace(ctxtTable, (fingerprint *) key, ctxtList);
         champion = choose_champion(ctxtList);
 
         //prefetch champion and followers fingerprint into cache
@@ -116,6 +126,9 @@ void lipa_index_lookup(struct segment *s) {
         if (storage_buffer.container_buffer
             && lookup_fingerprint_in_container(storage_buffer.container_buffer, &c->fp)) {
             c->id = get_container_id(storage_buffer.container_buffer);
+#ifdef DEBUG
+            count_duplicate_storage_buffer ++;
+#endif
             SET_CHUNK(c, CHUNK_DUPLICATE);
             SET_CHUNK(c, CHUNK_REWRITE_DENIED);
         }
@@ -129,6 +142,9 @@ void lipa_index_lookup(struct segment *s) {
         if (!tq) {
             tq = g_queue_new();
         } else if (!CHECK_CHUNK(c, CHUNK_DUPLICATE)) {
+#ifdef DEBUG
+            count_duplicate_fingerprint_buffer ++;
+#endif
             struct indexElem *be = g_queue_peek_head(tq);
             c->id = be->id;
             SET_CHUNK(c, CHUNK_DUPLICATE);
@@ -143,16 +159,40 @@ void lipa_index_lookup(struct segment *s) {
 
         if (!CHECK_CHUNK(c, CHUNK_DUPLICATE)) {
             int64_t id = fingerprint_cache_lookup(&(c->fp));
-            //printf("id is %d\n", id);
-
             if (id != TEMPORARY_ID) {
                 // find item in cache
+#ifdef DEBUG
+        count_duplicate_cache++;
+#endif
                 c->id = id;
+                assert(id >= 0);
                 SET_CHUNK(c, CHUNK_DUPLICATE);
-            }else {
-                index_overhead.lookup_requests_for_unique++;
             }
         }
+
+
+//        if (!CHECK_CHUNK(c, CHUNK_DUPLICATE)) {
+//
+//            /** now it doesn't hit cache
+//             * you should check kv store
+//             * */
+//
+//            int64_t* ids = kvstore_lookup(&(c->fp));
+//            if (ids) {
+//                index_overhead.lookup_requests ++;
+//                if (ids[0] != TEMPORARY_ID) {
+//                    c->id = ids[0];
+//                    SET_CHUNK(c, CHUNK_DUPLICATE);
+//                }
+//            }else {
+//                index_overhead.lookup_requests_for_unique++;
+//            }
+//        }
+
+        if (!CHECK_CHUNK(c, CHUNK_DUPLICATE)) {
+            index_overhead.lookup_requests_for_unique++;
+        }
+
 
         /**
          * After check cache, then write to recipe
@@ -166,7 +206,6 @@ void lipa_index_lookup(struct segment *s) {
 
         g_queue_push_tail(tq, ne);
         g_hash_table_replace(index_buffer.buffered_fingerprints, &ne->fp, tq);
-
         index_buffer.chunk_num++;
     }
 
@@ -223,7 +262,6 @@ double randomNumber(double min, double max) {
 }
 
 struct ctxtTableItem* epsilon_greedy_policy (GList *ctxtList) {
-    printf("choose champion\n");
     assert(ctxtList);
     srand(time(NULL));
     double rand_num = randomNumber(0, 1.0);
@@ -262,14 +300,13 @@ struct ctxtTableItem* random_policy(GList* ctxtList) {
 
 void fp_prefetch(GList *ctxtList, struct ctxtTableItem *champion, char* feature) {
     assert(champion);
-    GList* iter = g_list_find(ctxtList, champion);
+    GList *iter = g_list_find(ctxtList, champion);
 
     int iter_time = champion->followers;
-
-    for (int counter = 0; counter <= iter_time && iter != NULL; iter = g_list_next(iter), counter ++) {
+    int counter;
+    for (counter = 0; counter <= iter_time && iter != NULL; iter = g_list_next(iter), counter++) {
         //LIPA_fingerprint_cache_prefetch(champion->id, feature);
-        LIPA_fingerprint_cache_prefetch( ((struct ctxtTableItem *)(iter->data))->id,
-                feature);
+        LIPA_fingerprint_cache_prefetch(((struct ctxtTableItem *) (iter->data))->id,
+                                        feature);
     }
-
 }

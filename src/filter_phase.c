@@ -23,6 +23,17 @@ extern struct {
 	GCond cond; // index buffer is not full
 	int wait_threshold;
 } index_lock;
+extern hit;
+
+#ifdef DEBUG
+
+extern count_duplicate_cache;
+
+extern count_duplicate_storage_buffer;
+extern count_duplicate_fingerprint_buffer;
+
+
+#endif
 
 /*
  * When a container buffer is full, we push it into container_queue.
@@ -79,6 +90,24 @@ static void* filter_thread(void *arg) {
          * the rewrite request for it will be denied. */
         index_check_buffer(s);
 
+        GSequenceIter* chunk_iter = g_sequence_get_begin_iter(s->chunks);
+        GSequenceIter* chunk_end = g_sequence_get_end_iter(s->chunks);
+        struct chunk* chunk;
+        for (; chunk_iter != chunk_end; chunk_iter = g_sequence_iter_next(chunk_iter)) {
+            chunk = g_sequence_get(chunk_iter);
+            if (CHECK_CHUNK(chunk, CHUNK_FILE_END)) {
+                chunk_iter = g_sequence_iter_next(chunk_iter);
+                if (chunk_iter == chunk_end) {
+                    break;
+                }
+                chunk = g_sequence_get(chunk_iter);
+                assert(CHECK_CHUNK(chunk, CHUNK_FILE_START));
+            }
+        }
+
+
+
+
     	GSequenceIter *iter = g_sequence_get_begin_iter(s->chunks);
     	GSequenceIter *end = g_sequence_get_end_iter(s->chunks);
 
@@ -126,11 +155,10 @@ static void* filter_thread(void *arg) {
             }
 
             /* A fragmented chunk will be denied if it has been rewritten recently */
-            if (!CHECK_CHUNK(c, CHUNK_DUPLICATE) 
-					|| (!CHECK_CHUNK(c, CHUNK_REWRITE_DENIED)
-            		&& (CHECK_CHUNK(c, CHUNK_SPARSE)
-                    || (enable_rewrite && CHECK_CHUNK(c, CHUNK_OUT_OF_ORDER)
-                        && !CHECK_CHUNK(c, CHUNK_IN_CACHE))))) {
+            if (!CHECK_CHUNK(c, CHUNK_DUPLICATE) ||
+                (!CHECK_CHUNK(c, CHUNK_REWRITE_DENIED) &&
+                (CHECK_CHUNK(c, CHUNK_SPARSE) ||
+                (enable_rewrite && CHECK_CHUNK(c, CHUNK_OUT_OF_ORDER) && !CHECK_CHUNK(c, CHUNK_IN_CACHE))))) {
                 /*
                  * If the chunk is unique, or be fragmented and not denied,
                  * we write it to a container.
@@ -168,10 +196,11 @@ static void* filter_thread(void *arg) {
                 	memcpy(&wc->fp, &c->fp, sizeof(fingerprint));
                 	wc->id = c->id;
                 	if (!CHECK_CHUNK(c, CHUNK_DUPLICATE)) {
+                	    assert(wc->id != TEMPORARY_ID);
                 		jcr.unique_chunk_num++;
                 		jcr.unique_data_size += c->size;
                 		g_hash_table_insert(recently_unique_chunks, &wc->fp, wc);
-                    	VERBOSE("Filter phase: %dth chunk is recently unique, size %d", chunk_num,
+                    	NOTICE("Filter phase: %dth chunk is recently unique, size %d", chunk_num,
                     			g_hash_table_size(recently_unique_chunks));
                 	} else {
                 		jcr.rewritten_chunk_num++;
@@ -202,13 +231,16 @@ static void* filter_thread(void *arg) {
                 }
             }
 
-            assert(c->id != TEMPORARY_ID);
+            //assert(c->id != TEMPORARY_ID);
+            assert(c->id >= 0);
 
             /* Collect historical information. */
             har_monitor_update(c->id, c->size);
 
             /* Restore-aware */
             restore_aware_update(c->id, c->size);
+
+			//LIPA_chunk_index_update(c);
 
             chunk_num++;
         }
@@ -225,11 +257,17 @@ static void* filter_thread(void *arg) {
             c = g_sequence_get(iter);
 
         	if(r == NULL){
+        	    if (!CHECK_CHUNK(c, CHUNK_FILE_START)) {
+        	        printf("ERROR\n");
+        	    }
         		assert(CHECK_CHUNK(c,CHUNK_FILE_START));
         		r = new_file_recipe_meta(c->data);
         	}else if(!CHECK_CHUNK(c,CHUNK_FILE_END)){
         		struct chunkPointer cp;
         		cp.id = c->id;
+        		if (cp.id < 0) {
+        		    printf("ERROR\n");
+        		}
         		assert(cp.id>=0);
         		memcpy(&cp.fp, &c->fp, sizeof(fingerprint));
         		cp.size = c->size;
@@ -258,7 +296,7 @@ static void* filter_thread(void *arg) {
               * TO-DO
               * Update_index for logical locality
               */
-            s->features = sampling(s->chunks, s->chunk_num);
+            //s->features = sampling(s->chunks, s->chunk_num);
          	if(destor.index_category[0] == INDEX_CATEGORY_EXACT){
          		/*
          		 * For exact deduplication,
@@ -296,8 +334,8 @@ static void* filter_thread(void *arg) {
          			g_hash_table_insert(s->features, ft, NULL);
          		}
          	}
-         	index_update(s->features, sid);
-
+            //index_update(s->features, sid);
+            LIPA_segment_index_update(s->features, sid);
 
 			if (destor.index_specific == INDEX_SPECIFIC_LIPA)
 				LIPA_cache_update_index(s);
@@ -334,6 +372,10 @@ static void* filter_thread(void *arg) {
 
     /* All files done */
     jcr.status = JCR_STATUS_DONE;
+    printf("hit is %d\n", hit);
+    printf("duplicate cache is %d\n", count_duplicate_cache);
+    printf("storage cache is %d\n", count_duplicate_storage_buffer);
+    printf("fingerprint buffer cache is %d \n", count_duplicate_fingerprint_buffer);
     return NULL;
 }
 

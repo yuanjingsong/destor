@@ -2,8 +2,11 @@
 // Created by 袁靖松 on 2019-12-12.
 //
 #include <utils/lru_cache.h>
+#include <recipe/recipestore.h>
 #include "destor.h"
 #include "index.h"
+#include "kvstore.h"
+#include "fingerprint_cache.h"
 
 extern GHashTable* ctxtTable;
 
@@ -19,23 +22,38 @@ struct LIPA_cacheItem* new_lipa_cache_item(struct ctxtTableItem* ctxtTableItem) 
 
     GSequenceIter* chunkIter = g_sequence_get_begin_iter(ctxtTableItem ->segment_ptr->chunks);
     GSequenceIter* chunkIterEnd = g_sequence_get_end_iter(ctxtTableItem->segment_ptr->chunks);
+
     for (int count = 0; chunkIter != chunkIterEnd; chunkIter = g_sequence_iter_next(chunkIter), count ++) {
         struct chunk* c = g_sequence_get(chunkIter);
-        g_hash_table_insert(new_cacheItem->kvpairs, &c->fp, TEMPORARY_ID);
+
+        int* ids = kvstore_lookup((char*)&c->fp);
+        if (ids) {
+            assert(ids[0] >= 0);
+            g_hash_table_insert(new_cacheItem->kvpairs, &c->fp, ids[0]);
+        }else {
+            NOTICE("insert a new item ");
+            g_hash_table_insert(new_cacheItem->kvpairs, &c->fp, TEMPORARY_ID);
+        }
+
     }
 
     return new_cacheItem;
 }
 
+// if a cache item is free
+// then the info it records will destroyed,
+// and when a new lipa cache create
+// it will lose the information
+// so it will lower the ratio
 
 void free_lipa_cache(struct LIPA_cacheItem* cache) {
-    printf("free lipa cache item\n");
     g_hash_table_destroy(cache->kvpairs);
     free(cache);
 }
 
 void feedback(struct LIPA_cacheItem* cacheItem, char* feature) {
     struct ctxtTableItem* target_ctxtTableItem = cacheItem ->tableItemPtr;
+    assert(target_ctxtTableItem);
     target_ctxtTableItem ->update_time ++;
     target_ctxtTableItem -> score = target_ctxtTableItem -> score +
             ((double)(cacheItem->hit_score) - target_ctxtTableItem -> score) * (1.0 / target_ctxtTableItem -> update_time);

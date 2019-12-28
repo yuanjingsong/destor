@@ -73,11 +73,11 @@ int64_t fingerprint_cache_lookup(fingerprint *fp){
                 struct LIPA_cacheItem* cacheItem = lru_cache_lookup(lru_queue, fp);
                 if (cacheItem) {
                     //update cache item hit
-                    cacheItem ->hit_score ++;
                     containerid id = g_hash_table_lookup(cacheItem ->kvpairs, fp);
-                    if (id)
-                        // -2 mean it is duplicate
+                    if (id != TEMPORARY_ID) {
+                        cacheItem ->hit_score ++;
                         return id;
+                    }
                 }
 				break;
 			}
@@ -157,9 +157,7 @@ void LIPA_fingerprint_cache_prefetch(int64_t id, char* feature) {
 	if (!lru_cache_hits(lru_queue, id, lipa_cache_check_id)) {
 		index_overhead.read_prefetching_units ++;
 		struct ctxtTableItem* ctxtTableItem = LIPA_prefetch_item(feature, id);
-		if (ctxtTableItem == NULL) {
-			return;
-		}
+		assert(ctxtTableItem);
 		struct LIPA_cacheItem* cacheItem = new_lipa_cache_item(ctxtTableItem);
 		lru_cache_insert(lru_queue, cacheItem, feedback, NULL);
 	}
@@ -180,8 +178,13 @@ struct ctxtTableItem* LIPA_prefetch_item (char* feature, int64_t id) {
 
 void LIPA_cache_update(fingerprint *fp, containerid id) {
 
-	struct LIPA_cacheItem* cacheItem = lru_cache_lookup(lru_queue, fp);
-	assert(cacheItem);
-	g_hash_table_replace(cacheItem->kvpairs, fp, id);
+	GList* elem =  g_list_first(lru_queue->elem_queue);
+	while (elem) {
+	    if (lru_queue->hit_elem((struct LIPA_cacheItem*) (elem->data), fp)) {
+	    	g_hash_table_replace(((struct LIPA_cacheItem*)(elem->data))->kvpairs,
+	    			fp, id);
+	    }
+	    elem = g_list_next(elem);
+	}
 
 }

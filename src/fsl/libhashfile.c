@@ -453,6 +453,7 @@ int hashfile_chunking_method_str(struct hashfile_handle *handle,
 					fixed_params.chunk_size);
 		break;
 	case VARIABLE:
+	    printf("%d\n", handle->header.chnk_method_params.var_params.algo);
 		switch(handle->header.chnk_method_params.var_params.algo) {
 		case RANDOM:
 			snprintf(buf, size, "Variable-random, p=%Lf",

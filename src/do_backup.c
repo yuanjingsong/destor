@@ -156,6 +156,7 @@ void do_backup(char *path) {
 	char logfile[] = "backup.log";
 	FILE *fp = fopen(logfile, "a");
 	/*
+	 * method
 	 * job id,
 	 * the size of backup
 	 * accumulative consumed capacity,
@@ -167,7 +168,10 @@ void do_backup(char *path) {
 	 * 4 * index overhead (4 * int)
 	 * throughput,
 	 */
-	fprintf(fp, "%" PRId32 " %" PRId64 " %" PRId64 " %.4f %.4f %" PRId32 " %" PRId32 " %" PRId32 " %" PRId32" %" PRId32 " %" PRId32" %" PRId32" %.2f\n",
+
+
+	fprintf(fp, "%d " "%" PRId32 " %" PRId64 " %" PRId64 " %.4f %.4f %" PRId32 " %" PRId32 " %" PRId32 " %" PRId32" %" PRId32 " %" PRId32" %" PRId32" %.2f\n",
+			destor.index_specific,
 			jcr.id,
 			jcr.data_size,
 			destor.stored_data_size,

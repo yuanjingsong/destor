@@ -310,6 +310,36 @@ void index_update(GHashTable *features, int64_t id){
         kvstore_update(key, id);
     }
 }
+/**
+ * now kv store stores chunk feature and chunk id
+ *  key => feature
+ *  value => chunk_id
+ * @param chunk
+ */
+
+void LIPA_chunk_index_update(struct chunk* chunk) {
+    assert(chunk);
+    assert(chunk->id >=0);
+    if (CHECK_CHUNK(chunk, CHUNK_FILE_START) || CHECK_CHUNK(chunk, CHUNK_FILE_END)) {
+        return;
+    }
+    kvstore_update(&chunk->fp, chunk->id);
+}
+
+/**
+ * now kv store stores segments feature and chunk id
+ * and feature is sampled from a segment
+ * so it is near exact
+ * key => feature
+ * value => segment id
+ * @param features
+ * @param id  id is segment id
+ */
+void LIPA_segment_index_update(GHashTable* features, int64_t id) {
+    index_update(features, id);
+}
+
+
 
 inline void index_delete(fingerprint *fp, int64_t id){
 	kvstore_delete(fp, id);
@@ -394,7 +424,7 @@ int index_update_buffer(struct segment *s){
 }
 
 void LIPA_cache_update_index(struct segment* s) {
-    GSequenceIter* chunkIter = g_sequence_get_begin_iter(s ->chunks);
+    GSequenceIter* chunkIter = g_sequence_get_begin_iter(s->chunks);
     GSequenceIter* end = g_sequence_get_end_iter(s->chunks);
 
     for (; chunkIter != end; chunkIter = g_sequence_iter_next(chunkIter)) {
@@ -404,8 +434,7 @@ void LIPA_cache_update_index(struct segment* s) {
             continue;
 
         // which means chunk has container id
-        assert(c->id != TEMPORARY_ID) ;
-        LIPA_cache_update(&c->fp, c->id);
+        assert(c->id >= 0);
+        LIPA_cache_update(&(c->fp), c->id);
     }
-    printf("update chunk num is %d \n", s->chunk_num);
 }
