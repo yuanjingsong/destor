@@ -7,7 +7,7 @@
 #define DESTOR_LIPA_CACHE_H
 
 
-struct LIPA_cacheItem* new_lipa_cache_item(struct ctxtTableItem* ctxtTableItem);
+struct LIPA_cacheItem* new_lipa_cache_item(struct ctxtTableItem* ctxtTableItem, struct segmentRecipe* sr);
 
 void free_lipa_cache(struct LIPA_cacheItem* cache);
 

@@ -73,11 +73,11 @@ int64_t fingerprint_cache_lookup(fingerprint *fp){
                 struct LIPA_cacheItem* cacheItem = lru_cache_lookup(lru_queue, fp);
                 if (cacheItem) {
                     //update cache item hit
-                    containerid id = g_hash_table_lookup(cacheItem ->kvpairs, fp);
-                    if (id != TEMPORARY_ID) {
+                    struct chunkPointer* cp = g_hash_table_lookup(cacheItem ->kvpairs, fp);
+                    if (cp ->id <= TEMPORARY_ID) {
                         cacheItem ->hit_score ++;
-                        return id;
                     }
+                    return cp->id;
                 }
 				break;
 			}
@@ -147,20 +147,19 @@ void fingerprint_cache_prefetch(int64_t id){
 
 /**
  *
- * @param id is ctxtTableItem id
+ * @param item is context table item
  * prefetch the corresponding segment item
  * warp it into LIPA_cache_Item and prefetch into cache
  * don't prefetch any more
  */
-void LIPA_fingerprint_cache_prefetch(int64_t id, char* feature) {
-    // check the whether segment is in cache
-	if (!lru_cache_hits(lru_queue, id, lipa_cache_check_id)) {
-		index_overhead.read_prefetching_units ++;
-		struct ctxtTableItem* ctxtTableItem = LIPA_prefetch_item(feature, id);
-		assert(ctxtTableItem);
-		struct LIPA_cacheItem* cacheItem = new_lipa_cache_item(ctxtTableItem);
-		lru_cache_insert(lru_queue, cacheItem, feedback, NULL);
-	}
+
+void LIPA_fingerprint_cache_prefetch(struct ctxtTableItem* item, char* feature, struct segmentRecipe* sr) {
+    if (!lru_cache_hits(lru_queue, item->id, lipa_cache_check_id)) {
+        index_overhead.read_prefetching_units++;
+        struct LIPA_cacheItem* cacheItem = new_lipa_cache_item(item, sr);
+        assert(cacheItem);
+        lru_cache_insert(lru_queue, cacheItem, feedback, NULL);
+    }
 }
 
 

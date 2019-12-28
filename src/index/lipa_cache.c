@@ -10,7 +10,7 @@
 
 extern GHashTable* ctxtTable;
 
-struct LIPA_cacheItem* new_lipa_cache_item(struct ctxtTableItem* ctxtTableItem) {
+struct LIPA_cacheItem* new_lipa_cache_item(struct ctxtTableItem* ctxtTableItem, struct segmentRecipe* sr) {
     struct LIPA_cacheItem* new_cacheItem = (struct LIPA_cacheItem*)(malloc(sizeof(struct LIPA_cacheItem)));
 
     new_cacheItem ->id = ctxtTableItem ->id;
@@ -20,21 +20,12 @@ struct LIPA_cacheItem* new_lipa_cache_item(struct ctxtTableItem* ctxtTableItem) 
 
     new_cacheItem ->kvpairs = g_hash_table_new_full(g_feature_hash, g_feature_equal, NULL, NULL);
 
-    GSequenceIter* chunkIter = g_sequence_get_begin_iter(ctxtTableItem ->segment_ptr->chunks);
-    GSequenceIter* chunkIterEnd = g_sequence_get_end_iter(ctxtTableItem->segment_ptr->chunks);
 
-    for (int count = 0; chunkIter != chunkIterEnd; chunkIter = g_sequence_iter_next(chunkIter), count ++) {
-        struct chunk* c = g_sequence_get(chunkIter);
-
-        int* ids = kvstore_lookup((char*)&c->fp);
-        if (ids) {
-            assert(ids[0] >= 0);
-            g_hash_table_insert(new_cacheItem->kvpairs, &c->fp, ids[0]);
-        }else {
-            NOTICE("insert a new item ");
-            g_hash_table_insert(new_cacheItem->kvpairs, &c->fp, TEMPORARY_ID);
-        }
-
+    GHashTableIter tableIter;
+    gpointer key, value;
+    g_hash_table_iter_init(&tableIter, sr->kvpairs);
+    while (g_hash_table_iter_next(&tableIter, &key, &value)) {
+        g_hash_table_insert(new_cacheItem->kvpairs, &key, value);
     }
 
     return new_cacheItem;

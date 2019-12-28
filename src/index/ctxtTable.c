@@ -304,9 +304,16 @@ void fp_prefetch(GList *ctxtList, struct ctxtTableItem *champion, char* feature)
 
     int iter_time = champion->followers;
     int counter;
+    int64_t* ids = kvstore_lookup(feature);
+    segmentid id = (ids) ? ids[0] : -1;
+    GQueue* segmentRecipes = prefetch_segments(id, 1);
+    struct segmentRecipe* sr = g_queue_pop_head(segmentRecipes);
+
     for (counter = 0; counter <= iter_time && iter != NULL; iter = g_list_next(iter), counter++) {
         //LIPA_fingerprint_cache_prefetch(champion->id, feature);
-        LIPA_fingerprint_cache_prefetch(((struct ctxtTableItem *) (iter->data))->id,
-                                        feature);
+        LIPA_fingerprint_cache_prefetch(iter->data, feature, sr);
     }
+    free_segment_recipe(sr);
+
+    g_queue_free(segmentRecipes);
 }
