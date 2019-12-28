@@ -73,11 +73,11 @@ int64_t fingerprint_cache_lookup(fingerprint *fp){
                 struct LIPA_cacheItem* cacheItem = lru_cache_lookup(lru_queue, fp);
                 if (cacheItem) {
                     //update cache item hit
-                    struct chunkPointer* cp = g_hash_table_lookup(cacheItem ->kvpairs, fp);
-                    if (cp ->id <= TEMPORARY_ID) {
-                        cacheItem ->hit_score ++;
+                    int64_t id = g_hash_table_lookup(cacheItem->kvpairs, fp);
+                    if (id > TEMPORARY_ID) {
+                        cacheItem->hit_score++;
                     }
-                    return cp->id;
+                    return id;
                 }
 				break;
 			}

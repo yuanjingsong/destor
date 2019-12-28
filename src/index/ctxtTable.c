@@ -313,7 +313,8 @@ void fp_prefetch(GList *ctxtList, struct ctxtTableItem *champion, char* feature)
         //LIPA_fingerprint_cache_prefetch(champion->id, feature);
         LIPA_fingerprint_cache_prefetch(iter->data, feature, sr);
     }
-    free_segment_recipe(sr);
+    if (sr != NULL)
+        free_segment_recipe(sr);
 
     g_queue_free(segmentRecipes);
 }

@@ -26,7 +26,7 @@ struct LIPA_cacheItem* new_lipa_cache_item(struct ctxtTableItem* ctxtTableItem, 
 
         for(; chunkIter != chunkEnd; chunkIter = g_sequence_iter_next(chunkIter)){
             struct chunk* c = g_sequence_get(chunkIter);
-            g_hash_table_insert(new_cacheItem->kvpairs, &c->fp, TEMPORARY_ID):
+            g_hash_table_insert(new_cacheItem->kvpairs, &c->fp, TEMPORARY_ID);
         }
 
     }else {
@@ -34,7 +34,7 @@ struct LIPA_cacheItem* new_lipa_cache_item(struct ctxtTableItem* ctxtTableItem, 
         gpointer key, value;
         g_hash_table_iter_init(&tableIter, sr->kvpairs);
         while (g_hash_table_iter_next(&tableIter, &key, &value)) {
-            g_hash_table_insert(new_cacheItem->kvpairs, &key, value);
+            g_hash_table_insert(new_cacheItem->kvpairs, &key, ((struct chunkPointer*) value)->id);
         }
 
     }
