@@ -31,6 +31,9 @@ void init_index() {
             g_fingerprint_equal, NULL, NULL);
     index_buffer.chunk_num = 0;
 
+    // avoid change user set key value length
+    init_kvstore();
+
     if(destor.index_specific != INDEX_SPECIFIC_NO){
         destor.index_key_size = sizeof(fingerprint);
         switch(destor.index_specific){
@@ -113,7 +116,6 @@ void init_index() {
     init_sampling_method();
     init_segmenting_method();
 
-    init_kvstore();
 
     init_fingerprint_cache();
 

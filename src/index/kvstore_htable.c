@@ -15,6 +15,7 @@ typedef char* kvpair;
 
 static GHashTable *htable;
 
+int _index_key_size;
 static int32_t kvpair_size;
 
 /*
@@ -22,7 +23,7 @@ static int32_t kvpair_size;
  */
 static kvpair new_kvpair_full(char* key){
     kvpair kvp = malloc(kvpair_size);
-    memcpy(get_key(kvp), key, destor.index_key_size);
+    memcpy(get_key(kvp), key, _index_key_size);
     int64_t* values = get_value(kvp);
     int i;
     for(i = 0; i<destor.index_value_length; i++){
@@ -39,6 +40,10 @@ static kvpair new_kvpair(){
 		 values[i] = TEMPORARY_ID;
 	 }
 	 return kvp;
+}
+
+gboolean _g_feature_equal(char* a, char* b){
+    return !memcmp(a, b, _index_key_size);
 }
 
 /*
@@ -58,12 +63,13 @@ static inline void free_kvpair(kvpair kvp){
 
 void init_kvstore_htable(){
     kvpair_size = destor.index_key_size + destor.index_value_length * 8;
+    _index_key_size = destor.index_key_size;
 
     if(destor.index_key_size >=4)
-    	htable = g_hash_table_new_full(g_int_hash, g_feature_equal,
+    	htable = g_hash_table_new_full(g_int_hash, _g_feature_equal,
 			free_kvpair, NULL);
     else
-    	htable = g_hash_table_new_full(g_feature_hash, g_feature_equal,
+    	htable = g_hash_table_new_full(g_feature_hash, _g_feature_equal,
 			free_kvpair, NULL);
 
 	sds indexpath = sdsdup(destor.working_directory);
@@ -78,7 +84,7 @@ void init_kvstore_htable(){
 		for (; key_num > 0; key_num--) {
 			/* Read a feature */
 			kvpair kv = new_kvpair();
-			fread(get_key(kv), destor.index_key_size, 1, fp);
+			fread(get_key(kv), _index_key_size, 1, fp);
 
 			/* The number of segments/containers the feature refers to. */
 			int id_num, i;
@@ -118,7 +124,7 @@ void close_kvstore_htable() {
 
 		/* Write a feature. */
 		kvpair kv = value;
-		if(fwrite(get_key(kv), destor.index_key_size, 1, fp) != 1){
+		if(fwrite(get_key(kv), _index_key_size, 1, fp) != 1){
 			perror("Fail to write a key!");
 			exit(1);
 		}
@@ -139,7 +145,7 @@ void close_kvstore_htable() {
 
 	/* It is a rough estimation */
 	destor.index_memory_footprint = g_hash_table_size(htable)
-			* (destor.index_key_size + sizeof(int64_t) * destor.index_value_length + 4);
+			* (_index_key_size + sizeof(int64_t) * destor.index_value_length + 4);
 
 	fclose(fp);
 
@@ -154,14 +160,19 @@ void close_kvstore_htable() {
  * For top-k selection method.
  */
 int64_t* kvstore_htable_lookup(char* key) {
-	kvpair kv = g_hash_table_lookup(htable, key);
+    char* less_key = malloc(sizeof(char) * _index_key_size);
+    memcpy(less_key, key, _index_key_size);
+	kvpair kv = g_hash_table_lookup(htable, less_key);
+	free(less_key);
 	return kv ? get_value(kv) : NULL;
 }
 
 void kvstore_htable_update(char* key, int64_t id) {
-	kvpair kv = g_hash_table_lookup(htable, key);
+    char* less_key = malloc(sizeof(char) * _index_key_size);
+    memcpy(less_key, key, _index_key_size);
+	kvpair kv = g_hash_table_lookup(htable, less_key);
 	if (!kv) {
-		kv = new_kvpair_full(key);
+		kv = new_kvpair_full(less_key);
 		g_hash_table_replace(htable, get_key(kv), kv);
 	}
 	kv_update(kv, id);
@@ -169,7 +180,10 @@ void kvstore_htable_update(char* key, int64_t id) {
 
 /* Remove the 'id' from the kvpair identified by 'key' */
 void kvstore_htable_delete(char* key, int64_t id){
-	kvpair kv = g_hash_table_lookup(htable, key);
+    char* less_key = malloc(sizeof(char) * _index_key_size);
+    memcpy(less_key, key, _index_key_size);
+
+	kvpair kv = g_hash_table_lookup(htable, less_key);
 	if(!kv)
 		return;
 
