@@ -161,7 +161,8 @@ void close_kvstore_htable() {
  */
 int64_t* kvstore_htable_lookup(char* key) {
     char* less_key = malloc(sizeof(char) * _index_key_size);
-    memcpy(less_key, key, _index_key_size);
+    int offset = destor.index_key_size - _index_key_size;
+    memcpy(less_key, key+offset, _index_key_size);
 	kvpair kv = g_hash_table_lookup(htable, less_key);
 	free(less_key);
 	return kv ? get_value(kv) : NULL;
@@ -169,7 +170,8 @@ int64_t* kvstore_htable_lookup(char* key) {
 
 void kvstore_htable_update(char* key, int64_t id) {
     char* less_key = malloc(sizeof(char) * _index_key_size);
-    memcpy(less_key, key, _index_key_size);
+    int offset = destor.index_key_size - _index_key_size;
+    memcpy(less_key, key+offset, _index_key_size);
 	kvpair kv = g_hash_table_lookup(htable, less_key);
 	if (!kv) {
 		kv = new_kvpair_full(less_key);
@@ -181,7 +183,8 @@ void kvstore_htable_update(char* key, int64_t id) {
 /* Remove the 'id' from the kvpair identified by 'key' */
 void kvstore_htable_delete(char* key, int64_t id){
     char* less_key = malloc(sizeof(char) * _index_key_size);
-    memcpy(less_key, key, _index_key_size);
+    int offset = destor.index_key_size - _index_key_size;
+    memcpy(less_key, key+offset, _index_key_size);
 
 	kvpair kv = g_hash_table_lookup(htable, less_key);
 	if(!kv)
