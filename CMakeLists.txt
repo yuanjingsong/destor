@@ -78,6 +78,6 @@ add_executable(destor
         src/restore_aware.c
         src/rewrite_phase.c
         src/rewrite_phase.h
-        src/trace_phase.c )
+        src/trace_phase.c src/law_restore.c src/utils/priority_cache.c src/utils/priority_cache.h src/law_restore.h)
 
 target_link_libraries(destor glib-2.0 pthread ssl crypto isal_crypto)

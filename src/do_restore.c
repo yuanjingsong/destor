@@ -4,6 +4,7 @@
 #include "storage/containerstore.h"
 #include "utils/lru_cache.h"
 #include "restore.h"
+#include "law_restore.h"
 
 static void* lru_restore_thread(void *arg) {
 	struct lruCache *cache;
@@ -215,8 +216,11 @@ void do_restore(int revision, char *path) {
 		destor_log(DESTOR_NOTICE, "restore cache is OPT");
 		pthread_create(&read_t, NULL, optimal_restore_thread, NULL);
 	} else if (destor.restore_cache[0] == RESTORE_CACHE_ASM) {
-		destor_log(DESTOR_NOTICE, "restore cache is ASM");
-		pthread_create(&read_t, NULL, assembly_restore_thread, NULL);
+        destor_log(DESTOR_NOTICE, "restore cache is ASM");
+        pthread_create(&read_t, NULL, assembly_restore_thread, NULL);
+    } else if (destor.restore_cache[0] == RESTORE_CACHE_LAW) {
+	    destor_log(DESTOR_NOTICE, "restore cache is LAW") ;
+	    pthread_create(&read_t, NULL, law_restore_thread, NULL);
 	} else {
 		fprintf(stderr, "Invalid restore cache.\n");
 		exit(1);
